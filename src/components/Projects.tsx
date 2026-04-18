@@ -26,9 +26,17 @@ export function Projects() {
   return (
     <section id="projects" className="section-padding relative">
       <div className="max-w-6xl mx-auto">
-        <SectionHeading title="Other Projects" subtitle={
-          <>Explore more on <a href="https://github.com/kanhaiyakk" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent font-semibold">GitHub</a></> as any
-        } />
+        <SectionHeading
+          title="Other Projects"
+          subtitle={
+            <>
+              Explore more on{" "}
+              <a href="https://github.com/kanhaiyakk" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-accent font-semibold">
+                GitHub
+              </a>
+            </>
+          }
+        />
 
         <div className="grid md:grid-cols-2 gap-6">
           {projects.map((p, i) => (

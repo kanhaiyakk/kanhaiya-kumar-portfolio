@@ -2,7 +2,7 @@ import { ScrollReveal } from "./ScrollReveal";
 
 interface SectionHeadingProps {
   title: string;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
 }
 
 export function SectionHeading({ title, subtitle }: SectionHeadingProps) {
