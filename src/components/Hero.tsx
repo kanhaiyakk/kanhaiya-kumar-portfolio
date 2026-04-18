@@ -107,7 +107,7 @@ export function Hero() {
               <Github className="h-5 w-5" />
             </Button>
             <Button size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10"
-              onClick={() => window.open("https://www.linkedin.com/in/kanhaiya20598", "_blank")}>
+              onClick={() => window.open("https://www.linkedin.com/in/kanhaiya20598/", "_blank", "noopener,noreferrer")}>
               <Linkedin className="h-5 w-5" />
             </Button>
           </motion.div>

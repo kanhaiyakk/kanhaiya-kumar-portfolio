@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 const socials = [
   { icon: Github, href: "https://github.com/kanhaiyakk" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/kanhaiya20598" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/kanhaiya20598/" },
   { icon: Mail, href: "mailto:kanhaiya.kk20598@gmail.com", isEmail: true },
 ];
 
