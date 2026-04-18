@@ -45,14 +45,14 @@ function Cluster() {
   });
 
   const techs: TechBallProps[] = [
-    { label: "Java", position: [-2.2, 1.2, 0], color: "#f89820" },
-    { label: "Spring", position: [2.2, 0.8, -0.5], color: "#6db33f" },
-    { label: "REST", position: [0, -1.8, 0.5], color: "#22d3ee" },
-    { label: "JPA", position: [-1.8, -1, 1], color: "#3b82f6" },
-    { label: "Postgres", position: [1.8, -1.2, 0.8], color: "#336791" },
-    { label: "Docker", position: [0.2, 1.8, -0.8], color: "#0db7ed" },
-    { label: "AWS", position: [-2.6, -0.4, -1], color: "#ff9900" },
-    { label: "Junit", position: [2.4, -0.2, 0.8], color: "#25a162" },
+    { label: "Java", position: [-2.4, 1.3, 0], color: "#f89820" },
+    { label: "Spring Boot", position: [2.3, 1.0, -0.4], color: "#6db33f" },
+    { label: "REST APIs", position: [0, -2.0, 0.5], color: "#22d3ee" },
+    { label: "Postgres", position: [-1.9, -1.1, 1], color: "#336791" },
+    { label: "Docker", position: [1.9, -1.3, 0.8], color: "#0db7ed" },
+    { label: "AWS", position: [-2.7, -0.2, -1], color: "#ff9900" },
+    { label: "LLMs", position: [0.3, 2.0, -0.7], color: "#a855f7" },
+    { label: "AI", position: [2.5, -0.1, 0.9], color: "#ec4899" },
   ];
 
   return (
