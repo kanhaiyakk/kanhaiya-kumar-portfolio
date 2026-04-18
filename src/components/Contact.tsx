@@ -9,7 +9,7 @@ const info = [
   { icon: Mail, label: "Email", value: "kanhaiya.kk20598@gmail.com", link: "mailto:kanhaiya.kk20598@gmail.com" },
   { icon: Phone, label: "Phone", value: "+91 8804936144", link: "tel:+918804936144" },
   { icon: MapPin, label: "Location", value: "Bengaluru, India", link: null as string | null },
-  { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/kanhaiya20598", link: "https://www.linkedin.com/in/kanhaiya20598" },
+  { icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/kanhaiya20598", link: "https://www.linkedin.com/in/kanhaiya20598/" },
   { icon: Github, label: "GitHub", value: "github.com/kanhaiyakk", link: "https://github.com/kanhaiyakk" },
 ];
 
