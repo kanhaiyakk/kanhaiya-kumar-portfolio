@@ -3,7 +3,7 @@ import { Github, Mail, Download, Linkedin, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import profilePhoto from "@/assets/Kanhaiya_profile_photo.jpg";
-import { HeroCanvas } from "./three/HeroCanvas";
+import { LaptopCanvas } from "./three/LaptopCanvas";
 
 const roles = [
   "Java Backend Developer",
@@ -23,8 +23,8 @@ export function Hero() {
   return (
     <section id="home" className="relative min-h-screen flex items-center hero-cinematic overflow-hidden pt-20">
       {/* 3D scene fills the right half on desktop, full background on mobile */}
-      <div className="absolute inset-0 md:left-1/2 opacity-90">
-        <HeroCanvas />
+      <div className="absolute inset-0 md:left-1/2 opacity-95">
+        <LaptopCanvas />
       </div>
       {/* Gradient mask so text remains readable */}
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent md:to-background/0 pointer-events-none" />
