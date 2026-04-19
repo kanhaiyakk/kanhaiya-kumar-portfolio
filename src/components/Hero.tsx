@@ -102,9 +102,10 @@ export function Hero() {
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
               <Mail className="mr-2 h-5 w-5" /> Contact
             </Button>
-            <Button size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10"
-              onClick={() => window.open("https://github.com/kanhaiyakk", "_blank")}>
-              <Github className="h-5 w-5" />
+            <Button asChild size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10">
+              <a href="https://github.com/kanhaiyakk" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub profile">
+                <Github className="h-5 w-5" />
+              </a>
             </Button>
             <Button asChild size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10">
               <a
