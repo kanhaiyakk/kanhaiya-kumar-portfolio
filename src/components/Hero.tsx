@@ -3,7 +3,7 @@ import { Github, Mail, Download, Linkedin, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import profilePhoto from "@/assets/Kanhaiya_profile_photo.jpg";
-import { LaptopCanvas } from "./three/LaptopCanvas";
+import { HeroCanvas } from "./three/HeroCanvas";
 
 const roles = [
   "Java Backend Developer",
@@ -23,15 +23,15 @@ export function Hero() {
   return (
     <section id="home" className="relative min-h-screen flex items-center hero-cinematic overflow-hidden pt-20">
       {/* 3D scene fills the right half on desktop, full background on mobile */}
-      <div className="absolute inset-0 md:left-1/2 opacity-95">
-        <LaptopCanvas />
+      <div className="absolute inset-0 opacity-95">
+        <HeroCanvas />
       </div>
       {/* Gradient mask so text remains readable */}
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent md:to-background/0 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/30 md:from-background/95 md:via-background/70 md:to-background/10 pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center w-full py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-16">
         {/* Left: copy */}
-        <div className="text-center md:text-left">
+        <div className="text-center md:text-left max-w-3xl">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -106,15 +106,19 @@ export function Hero() {
               onClick={() => window.open("https://github.com/kanhaiyakk", "_blank")}>
               <Github className="h-5 w-5" />
             </Button>
-            <Button size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10"
-              onClick={() => window.open("https://www.linkedin.com/in/kanhaiya20598/", "_blank", "noopener,noreferrer")}>
-              <Linkedin className="h-5 w-5" />
+            <Button asChild size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10">
+              <a
+                href="https://www.linkedin.com/in/kanhaiya20598/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open LinkedIn profile"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
             </Button>
           </motion.div>
         </div>
 
-        {/* Right: 3D placeholder block (canvas is absolutely positioned behind) */}
-        <div className="hidden md:block h-[500px]" aria-hidden />
       </div>
 
       <motion.div
