@@ -1,6 +1,6 @@
 import { Suspense, useMemo, useRef, useState } from "react";
 import { Canvas, ThreeEvent, useFrame } from "@react-three/fiber";
-import { OrbitControls, Float, Text, Sphere, useCursor } from "@react-three/drei";
+import { Billboard, OrbitControls, Float, Text, Sphere, useCursor } from "@react-three/drei";
 import * as THREE from "three";
 
 interface TechBallProps {
@@ -62,28 +62,34 @@ function TechBall({ label, position, color, isActive, onSelect }: TechBallProps)
             />
           </mesh>
         )}
-        <Text
-          position={[0, 0, 0.56]}
-          fontSize={0.18}
-          color="#ffffff"
-          anchorX="center"
-          anchorY="middle"
-          maxWidth={1}
-          textAlign="center"
-        >
-          {label}
-        </Text>
-        {(hovered || isActive) && (
+        <Billboard>
           <Text
-            position={[0, -0.95, 0]}
-            fontSize={0.12}
-            color="#7dd3fc"
+            position={[0, 0, 0.6]}
+            fontSize={0.2}
+            color="#ffffff"
             anchorX="center"
             anchorY="middle"
+            maxWidth={1.2}
+            textAlign="center"
+            outlineWidth={0.012}
+            outlineColor="#000000"
           >
-            {isActive ? "Selected" : "Tap me"}
+            {label}
           </Text>
-        )}
+          {(hovered || isActive) && (
+            <Text
+              position={[0, -0.95, 0]}
+              fontSize={0.14}
+              color="#7dd3fc"
+              anchorX="center"
+              anchorY="middle"
+              outlineWidth={0.01}
+              outlineColor="#000000"
+            >
+              {isActive ? "Selected" : "Tap me"}
+            </Text>
+          )}
+        </Billboard>
       </group>
     </Float>
   );
