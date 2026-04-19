@@ -3,7 +3,7 @@ import { Github, Mail, Download, Linkedin, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import profilePhoto from "@/assets/Kanhaiya_profile_photo.jpg";
-import { LaptopCanvas } from "./three/LaptopCanvas";
+import { HeroCanvas } from "./three/HeroCanvas";
 
 const roles = [
   "Java Backend Developer",
@@ -24,7 +24,7 @@ export function Hero() {
     <section id="home" className="relative min-h-screen flex items-center hero-cinematic overflow-hidden pt-20">
       {/* 3D scene fills the right half on desktop, full background on mobile */}
       <div className="absolute inset-0 md:left-1/2 opacity-95">
-        <LaptopCanvas />
+        <HeroCanvas />
       </div>
       {/* Gradient mask so text remains readable */}
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent md:to-background/0 pointer-events-none" />
@@ -106,9 +106,15 @@ export function Hero() {
               onClick={() => window.open("https://github.com/kanhaiyakk", "_blank")}>
               <Github className="h-5 w-5" />
             </Button>
-            <Button size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10"
-              onClick={() => window.open("https://www.linkedin.com/in/kanhaiya20598/", "_blank", "noopener,noreferrer")}>
-              <Linkedin className="h-5 w-5" />
+            <Button asChild size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10">
+              <a
+                href="https://www.linkedin.com/in/kanhaiya20598/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open LinkedIn profile"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
             </Button>
           </motion.div>
         </div>
