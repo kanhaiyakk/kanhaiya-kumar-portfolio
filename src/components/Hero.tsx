@@ -110,7 +110,7 @@ export function Hero() {
             <Button asChild size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10">
               <a
                 href="https://www.linkedin.com/in/kanhaiya20598/"
-                target="_blank"
+                target="_top"
                 rel="noopener noreferrer"
                 aria-label="Open LinkedIn profile"
               >
