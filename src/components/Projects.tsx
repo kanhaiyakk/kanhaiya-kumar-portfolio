@@ -64,13 +64,15 @@ export function Projects() {
                 </div>
 
                 <div className="mt-auto flex gap-3">
-                  <Button className="flex-1 gradient-primary text-primary-foreground hover:opacity-90 shadow-glow"
-                    onClick={() => window.open(p.github, "_blank")}>
-                    <Github className="mr-2 h-4 w-4" /> View Code
+                  <Button asChild className="flex-1 gradient-primary text-primary-foreground hover:opacity-90 shadow-glow">
+                    <a href={p.github} target="_blank" rel="noopener noreferrer">
+                      <Github className="mr-2 h-4 w-4" /> View Code
+                    </a>
                   </Button>
-                  <Button variant="outline" size="icon" className="border-primary/40 hover:border-primary"
-                    onClick={() => window.open(p.github, "_blank")}>
-                    <ExternalLink className="h-4 w-4" />
+                  <Button asChild variant="outline" size="icon" className="border-primary/40 hover:border-primary">
+                    <a href={p.github} target="_blank" rel="noopener noreferrer" aria-label="Open project on GitHub">
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
                   </Button>
                 </div>
               </Card>
