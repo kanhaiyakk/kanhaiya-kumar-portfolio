@@ -23,15 +23,15 @@ export function Hero() {
   return (
     <section id="home" className="relative min-h-screen flex items-center hero-cinematic overflow-hidden pt-20">
       {/* 3D scene fills the right half on desktop, full background on mobile */}
-      <div className="absolute inset-0 md:left-1/2 opacity-95">
+      <div className="absolute inset-0 opacity-95">
         <HeroCanvas />
       </div>
       {/* Gradient mask so text remains readable */}
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent md:to-background/0 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/30 md:from-background/95 md:via-background/70 md:to-background/10 pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center w-full py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-16">
         {/* Left: copy */}
-        <div className="text-center md:text-left">
+        <div className="text-center md:text-left max-w-3xl">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -119,8 +119,6 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Right: 3D placeholder block (canvas is absolutely positioned behind) */}
-        <div className="hidden md:block h-[500px]" aria-hidden />
       </div>
 
       <motion.div
