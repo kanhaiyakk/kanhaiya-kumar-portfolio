@@ -34,9 +34,10 @@ export function Achievements() {
                       <p className="text-xs text-muted-foreground">Problems Solved</p>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm" className="w-full border-border hover:border-primary/60"
-                    onClick={() => window.open(p.link, "_blank")}>
-                    View Profile <ExternalLink className="ml-2 h-3.5 w-3.5" />
+                  <Button asChild variant="outline" size="sm" className="w-full border-border hover:border-primary/60">
+                    <a href={p.link} target="_blank" rel="noopener noreferrer">
+                      View Profile <ExternalLink className="ml-2 h-3.5 w-3.5" />
+                    </a>
                   </Button>
                 </Card>
               ))}
