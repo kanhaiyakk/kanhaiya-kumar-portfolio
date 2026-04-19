@@ -1,6 +1,6 @@
 import { Suspense, useMemo, useRef, useState } from "react";
 import { Canvas, ThreeEvent, useFrame } from "@react-three/fiber";
-import { OrbitControls, Float, Text, Sphere, useCursor } from "@react-three/drei";
+import { Billboard, OrbitControls, Float, Text, Sphere, useCursor } from "@react-three/drei";
 import * as THREE from "three";
 
 interface TechBallProps {
@@ -54,36 +54,42 @@ function TechBall({ label, position, color, isActive, onSelect }: TechBallProps)
           <mesh rotation={[Math.PI / 2, 0, 0]} scale={1.2}>
             <torusGeometry args={[0.62, 0.03, 16, 100]} />
             <meshStandardMaterial
-              color="hsl(191 95% 68%)"
-              emissive="hsl(191 95% 68%)"
+              color="#7dd3fc"
+              emissive="#22d3ee"
               emissiveIntensity={0.6}
               metalness={0.9}
               roughness={0.2}
             />
           </mesh>
         )}
-        <Text
-          position={[0, 0, 0.56]}
-          fontSize={0.18}
-          color="hsl(0 0% 100%)"
-          anchorX="center"
-          anchorY="middle"
-          maxWidth={1}
-          textAlign="center"
-        >
-          {label}
-        </Text>
-        {(hovered || isActive) && (
+        <Billboard>
           <Text
-            position={[0, -0.95, 0]}
-            fontSize={0.12}
-            color="hsl(191 95% 68%)"
+            position={[0, 0, 0.6]}
+            fontSize={0.2}
+            color="#ffffff"
             anchorX="center"
             anchorY="middle"
+            maxWidth={1.2}
+            textAlign="center"
+            outlineWidth={0.012}
+            outlineColor="#000000"
           >
-            {isActive ? "Selected" : "Tap me"}
+            {label}
           </Text>
-        )}
+          {(hovered || isActive) && (
+            <Text
+              position={[0, -0.95, 0]}
+              fontSize={0.14}
+              color="#7dd3fc"
+              anchorX="center"
+              anchorY="middle"
+              outlineWidth={0.01}
+              outlineColor="#000000"
+            >
+              {isActive ? "Selected" : "Tap me"}
+            </Text>
+          )}
+        </Billboard>
       </group>
     </Float>
   );
@@ -104,14 +110,14 @@ function Cluster({ activeLabel, onSelect }: ClusterProps) {
 
   const techs = useMemo<Array<{ label: string; position: [number, number, number]; color: string }>>(
     () => [
-      { label: "Java", position: [-2.4, 1.3, 0], color: "hsl(34 92% 55%)" },
-      { label: "Spring Boot", position: [2.3, 1.0, -0.4], color: "hsl(96 47% 48%)" },
-      { label: "REST APIs", position: [0, -2.0, 0.5], color: "hsl(191 95% 58%)" },
-      { label: "Postgres", position: [-1.9, -1.1, 1], color: "hsl(209 48% 39%)" },
-      { label: "Docker", position: [1.9, -1.3, 0.8], color: "hsl(197 89% 49%)" },
-      { label: "AWS", position: [-2.7, -0.2, -1], color: "hsl(36 100% 50%)" },
-      { label: "LLMs", position: [0.3, 2.0, -0.7], color: "hsl(271 91% 65%)" },
-      { label: "AI", position: [2.5, -0.1, 0.9], color: "hsl(328 87% 60%)" },
+      { label: "Java", position: [-2.4, 1.3, 0], color: "#f89820" },
+      { label: "Spring Boot", position: [2.3, 1.0, -0.4], color: "#6db33f" },
+      { label: "REST APIs", position: [0, -2.0, 0.5], color: "#22d3ee" },
+      { label: "Postgres", position: [-1.9, -1.1, 1], color: "#336791" },
+      { label: "Docker", position: [1.9, -1.3, 0.8], color: "#0db7ed" },
+      { label: "AWS", position: [-2.7, -0.2, -1], color: "#ff9900" },
+      { label: "LLMs", position: [0.3, 2.0, -0.7], color: "#a855f7" },
+      { label: "AI", position: [2.5, -0.1, 0.9], color: "#ec4899" },
     ],
     [],
   );
@@ -133,12 +139,12 @@ export function TechCanvas() {
       <Suspense fallback={null}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
-        <pointLight position={[-5, 5, -5]} intensity={0.6} color="hsl(191 95% 58%)" />
+        <pointLight position={[-5, 5, -5]} intensity={0.6} color="#22d3ee" />
         <Cluster activeLabel={activeLabel} onSelect={setActiveLabel} />
         <Text
           position={[0, -3.1, 0]}
           fontSize={0.18}
-          color="hsl(191 95% 68%)"
+          color="#7dd3fc"
           anchorX="center"
           anchorY="middle"
           maxWidth={6}
