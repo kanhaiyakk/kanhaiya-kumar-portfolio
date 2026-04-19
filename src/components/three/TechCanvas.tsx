@@ -102,7 +102,7 @@ function Cluster({ activeLabel, onSelect }: ClusterProps) {
     group.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.3) * 0.08;
   });
 
-  const techs = useMemo(
+  const techs = useMemo<Array<{ label: string; position: [number, number, number]; color: string }>>(
     () => [
       { label: "Java", position: [-2.4, 1.3, 0], color: "hsl(34 92% 55%)" },
       { label: "Spring Boot", position: [2.3, 1.0, -0.4], color: "hsl(96 47% 48%)" },
