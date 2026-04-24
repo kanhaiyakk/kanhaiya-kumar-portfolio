@@ -20,7 +20,7 @@ export function Footer() {
           <div className="flex gap-2">
             {socials.map(({ icon: Icon, href, isEmail }) => (
               <Button key={href} variant="ghost" size="icon" className="hover:bg-primary/10 hover:text-primary transition-smooth" asChild>
-                <a href={href} target={isEmail ? undefined : href.includes("linkedin.com") ? "_top" : "_blank"} rel={isEmail ? undefined : "noopener noreferrer"} aria-label={href}>
+                <a href={href} target={isEmail ? undefined : "_blank"} rel={isEmail ? undefined : "noopener noreferrer"} aria-label={href}>
                   <Icon className="h-4 w-4" />
                 </a>
               </Button>

@@ -33,7 +33,7 @@ export function Contact() {
                       {c.link ? (
                         <a
                           href={c.link}
-                          target={c.link.includes("linkedin.com") ? "_top" : c.link.startsWith("http") ? "_blank" : undefined}
+                            target={c.link.startsWith("http") ? "_blank" : undefined}
                           rel={c.link.startsWith("http") ? "noopener noreferrer" : undefined}
                           className="text-sm text-foreground font-medium hover:text-primary transition-smooth break-all"
                         >
