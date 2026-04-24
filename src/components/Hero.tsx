@@ -23,7 +23,7 @@ export function Hero() {
   return (
     <section id="home" className="relative min-h-screen flex items-center hero-cinematic overflow-hidden pt-20">
       {/* 3D scene fills the right half on desktop, full background on mobile */}
-      <div className="absolute inset-0 opacity-95">
+      <div className="absolute inset-0 opacity-95 pointer-events-none">
         <HeroCanvas />
       </div>
       {/* Gradient mask so text remains readable */}
@@ -110,7 +110,7 @@ export function Hero() {
             <Button asChild size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10">
               <a
                 href="https://www.linkedin.com/in/kanhaiya20598/"
-                target="_top"
+                target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Open LinkedIn profile"
               >
