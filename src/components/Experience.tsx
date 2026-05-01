@@ -31,7 +31,7 @@ const experiences = [
       "Designed scalable RESTful APIs with Spring Boot, improving response times by 10%.",
       "Optimized database queries using JPA and MySQL, reducing retrieval times by 15%.",
       "Achieved 90%+ test coverage via comprehensive unit and integration tests.",
-      "Conducted 20+ technical interviews for Java backend developer positions.",
+      "Conducted 50+ technical interviews for Java backend developer positions.",
     ],
   },
   {
