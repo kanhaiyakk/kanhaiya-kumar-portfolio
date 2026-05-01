@@ -9,12 +9,13 @@ export function Skills() {
     { title: "Languages", skills: ["Java 21"] },
     { title: "Frameworks", skills: ["Spring Boot", "Spring MVC", "Spring Data JPA", "Spring Security", "Hibernate"] },
     { title: "Backend & Architecture", skills: ["REST APIs", "Microservices", "Hexagonal Architecture"] },
-    { title: "Databases", skills: ["MySQL", "PostgreSQL"] },
+    { title: "AI / Intelligent Systems", skills: ["LLM Integration", "Google Gemini API", "AI-powered CV Parsing", "Semantic Search", "Embeddings", "AI-driven Backend Systems", "Document Processing", "pgvector"] },
+    { title: "Databases", skills: ["MySQL", "PostgreSQL", "pgvector"] },
     { title: "Tools", skills: ["Gradle", "Git", "GitHub", "Docker", "Postman", "Swagger", "Sentry", "Jira"] },
     { title: "Testing", skills: ["JUnit", "Mockito"] },
-    { title: "Cloud", skills: ["AWS"] },
-    { title: "Core CS", skills: ["DSA", "OOPs", "Collections", "Java 8 Features"] },
-    { title: "Methodology", skills: ["Agile"] },
+    { title: "Cloud", skills: ["AWS", "Azure"] },
+    { title: "Core CS", skills: ["DSA", "OOPs", "Collections", "Java 8+"] },
+    { title: "Methodology", skills: ["Agile", "TDD", "Code Review"] },
   ];
 
   return (
