@@ -1,56 +1,49 @@
+import { Card } from "@/components/ui/card";
+import { Code2, Database, TestTube, Award } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
 import { SectionHeading } from "./SectionHeading";
 
-const skillGroups = [
-  { label: "Languages", items: ["Java 21"] },
-  { label: "Frameworks", items: ["Spring Boot", "Spring Data JPA", "Spring Security", "Hibernate"] },
-  { label: "Architecture", items: ["Microservices", "REST", "Hexagonal"] },
-  { label: "Data", items: ["PostgreSQL", "MySQL", "Redis"] },
-  { label: "Infra & Tools", items: ["Docker", "AWS", "Gradle", "Git", "Sentry"] },
-  { label: "Testing", items: ["JUnit", "Mockito"] },
-];
-
 export function About() {
+  const highlights = [
+    { icon: Code2, title: "Clean Architecture", description: "Expert in Hexagonal Architecture with 85-90%+ test coverage" },
+    { icon: Database, title: "Database Optimization", description: "Proven track record of 15% performance improvements" },
+    { icon: TestTube, title: "Test-Driven Development", description: "JUnit & Mockito expert ensuring maintainable code" },
+    { icon: Award, title: "Problem Solver", description: "500+ DSA problems solved across platforms" },
+  ];
+
   return (
-    <section id="about" className="section-padding">
-      <div className="max-w-5xl mx-auto">
-        <SectionHeading
-          eyebrow="About"
-          title="Backend, the unglamorous parts."
-          subtitle="I'm a backend engineer who likes systems that don't need attention. Most of the work I'm proud of is invisible — fewer pages, lower latency tails, cleaner failure modes."
-        />
+    <section id="about" className="section-padding relative">
+      <div className="max-w-6xl mx-auto">
+        <SectionHeading title="About Me" />
 
-        <div className="grid md:grid-cols-5 gap-12 items-start">
-          <ScrollReveal direction="left" className="md:col-span-3 space-y-5">
-            <p className="text-foreground leading-relaxed">
-              I work mostly in <span className="text-primary">Java and Spring Boot</span>, building monoliths
-              and microservices for banking and product teams. I care about test
-              coverage (typically 85–90%), clean boundaries (Hexagonal when it earns
-              its keep), and APIs that other people don't have to read the source to
-              use.
-            </p>
-            <p className="text-foreground leading-relaxed">
-              On the side, I've solved <span className="text-primary">500+ DSA problems</span> across
-              LeetCode, GeeksforGeeks, and HackerRank — partly for interviews, mostly because
-              I like the puzzle.
-            </p>
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          <ScrollReveal direction="left">
+            <div className="space-y-5">
+              <p className="text-lg text-foreground/90 leading-relaxed">
+                I'm a <span className="font-semibold text-primary">Backend Developer</span> skilled in building <span className="font-semibold text-foreground">scalable, high-performance applications</span> using <span className="font-semibold text-accent">Java, Spring Boot, and REST APIs</span>. Proficient in both monolithic and microservices architectures, with expertise in bug fixing, performance optimization, and clean code.
+              </p>
+              <p className="text-lg text-foreground/90 leading-relaxed">
+                I have a <span className="font-semibold text-primary">strong problem-solving background</span> with <span className="font-semibold text-accent">500+ DSA problems solved</span>, and a proven ability to collaborate in Agile teams to deliver impactful solutions across banking and product-based domains.
+              </p>
+              <p className="text-lg text-foreground/90 leading-relaxed">
+                My approach emphasizes <span className="font-semibold text-accent">clean, testable, maintainable code</span> — implementing <span className="font-semibold text-primary">Hexagonal Architecture</span> and consistently achieving <span className="font-semibold text-foreground">85-90%+ test coverage</span> with JUnit and Mockito.
+              </p>
+            </div>
           </ScrollReveal>
 
-          <ScrollReveal direction="right" className="md:col-span-2">
-            <p className="font-mono-ui text-xs text-muted-foreground mb-4">// stack</p>
-            <dl className="space-y-4">
-              {skillGroups.map((g) => (
-                <div key={g.label}>
-                  <dt className="font-mono-ui text-xs text-muted-foreground mb-1">
-                    {g.label}
-                  </dt>
-                  <dd className="font-mono-ui text-sm text-foreground">
-                    {g.items.join(" · ")}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </ScrollReveal>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {highlights.map((h, i) => (
+              <ScrollReveal key={i} delay={i * 0.1} direction="right">
+                <Card className="p-5 hover-lift bg-gradient-card backdrop-blur border-border/50 h-full">
+                  <div className="p-2.5 rounded-lg gradient-primary inline-block mb-3">
+                    <h.icon className="h-5 w-5 text-primary-foreground" />
+                  </div>
+                  <h3 className="font-semibold text-base mb-1">{h.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{h.description}</p>
+                </Card>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "#home", label: "Home" },
-  { href: "#work", label: "Work" },
-  { href: "#experience", label: "Experience" },
   { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#experience", label: "Experience" },
+  { href: "#featured-project", label: "Featured" },
+  { href: "#projects", label: "Projects" },
+  { href: "#achievements", label: "Achievements" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -14,7 +18,7 @@ export function Navigation() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -28,53 +32,53 @@ export function Navigation() {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-smooth ${
-          scrolled ? "nav-blur" : "bg-transparent"
+          scrolled ? "glass-strong border-b border-border/50" : "bg-transparent"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <a
               href="#home"
               onClick={(e) => { e.preventDefault(); go("#home"); }}
-              className="font-mono-ui text-sm tracking-tight text-foreground hover:text-primary transition-colors"
+              className="text-2xl font-bold text-gradient"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              kk<span className="text-primary">.</span>
+              KK<span className="text-primary">.</span>
             </a>
 
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-1">
               {navLinks.map((l) => (
-                <button
+                <Button
                   key={l.href}
+                  variant="ghost"
+                  size="sm"
+                  className="text-muted-foreground hover:text-foreground hover:bg-primary/10"
                   onClick={(e) => { e.preventDefault(); go(l.href); }}
-                  className="font-mono-ui text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {l.label}
-                </button>
+                </Button>
               ))}
             </div>
 
-            <button
-              className="md:hidden p-2 text-foreground"
-              onClick={() => setOpen(!open)}
-              aria-label="Toggle menu"
-            >
-              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
+            <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setOpen(!open)}>
+              {open ? <X /> : <Menu />}
+            </Button>
           </div>
         </div>
       </nav>
 
       {open && (
-        <div className="fixed inset-0 z-40 md:hidden bg-background/95 backdrop-blur pt-20">
-          <div className="flex flex-col items-start gap-1 p-8">
+        <div className="fixed inset-0 z-40 md:hidden glass-strong pt-20">
+          <div className="flex flex-col items-center gap-2 p-8">
             {navLinks.map((l) => (
-              <button
+              <Button
                 key={l.href}
-                className="font-display text-3xl py-3 text-foreground hover:text-primary transition-colors"
+                variant="ghost"
+                className="text-lg w-full"
                 onClick={(e) => { e.preventDefault(); go(l.href); }}
               >
                 {l.label}
-              </button>
+              </Button>
             ))}
           </div>
         </div>

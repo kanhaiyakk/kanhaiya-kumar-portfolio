@@ -1,25 +1,33 @@
 import { Navigation } from "@/components/Navigation";
 import { Hero } from "@/components/Hero";
-import { Work } from "@/components/Work";
-import { Experience } from "@/components/Experience";
 import { About } from "@/components/About";
-import { Notes } from "@/components/Notes";
+import { Skills } from "@/components/Skills";
+import { Experience } from "@/components/Experience";
+import { FeaturedProjects } from "@/components/FeaturedProjects";
+import { Projects } from "@/components/Projects";
+import { Achievements } from "@/components/Achievements";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { StarsCanvas } from "@/components/three/StarsCanvas";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Navigation />
-      <main>
+    <div className="min-h-screen relative bg-background">
+      {/* Global animated star-field behind everything */}
+      <StarsCanvas />
+
+      <div className="relative z-10">
+        <Navigation />
         <Hero />
-        <Work />
-        <Experience />
         <About />
-        <Notes />
+        <Skills />
+        <Experience />
+        <FeaturedProjects />
+        <Projects />
+        <Achievements />
         <Contact />
-      </main>
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 };

@@ -1,26 +1,20 @@
 import { ScrollReveal } from "./ScrollReveal";
 
 interface SectionHeadingProps {
-  eyebrow?: string;
   title: string;
   subtitle?: React.ReactNode;
 }
 
-export function SectionHeading({ eyebrow, title, subtitle }: SectionHeadingProps) {
+export function SectionHeading({ title, subtitle }: SectionHeadingProps) {
   return (
-    <ScrollReveal className="mb-16 max-w-3xl">
-      {eyebrow && (
-        <p className="font-mono-ui text-xs text-muted-foreground mb-4">
-          // {eyebrow}
-        </p>
-      )}
-      <h2 className="font-display font-bold text-foreground text-4xl md:text-5xl leading-tight mb-4">
+    <ScrollReveal className="text-center mb-16">
+      <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground mb-3">What I bring</p>
+      <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
         {title}
       </h2>
+      <div className="w-20 h-1 gradient-primary mx-auto rounded-full" />
       {subtitle && (
-        <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-          {subtitle}
-        </p>
+        <p className="text-muted-foreground text-lg mt-4 max-w-2xl mx-auto">{subtitle}</p>
       )}
     </ScrollReveal>
   );
