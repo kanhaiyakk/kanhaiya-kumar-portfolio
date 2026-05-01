@@ -7,10 +7,10 @@ import { HeroCanvas } from "./three/HeroCanvas";
 
 const roles = [
   "Java Backend Developer",
-  "Spring Boot Engineer",
-  "Microservices Architect",
-  "REST API Designer",
-  "DSA Enthusiast",
+  "AI-Powered Backend Engineer",
+  "Spring Boot & Hexagonal Architect",
+  "LLM & Gemini API Integrator",
+  "Semantic Search · pgvector",
 ];
 
 export function Hero() {
@@ -84,8 +84,8 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="text-base md:text-lg text-muted-foreground mb-8 max-w-xl md:mx-0 mx-auto leading-relaxed"
           >
-            I craft scalable, high-performance backend systems with Java, Spring Boot & Microservices —
-            architected for resilience, tested to 90% coverage, and shipped with care.
+            I build AI-powered backend systems with Java 21, Spring Boot & Hexagonal Architecture —
+            integrating Google Gemini LLMs, pgvector semantic search and resilient REST APIs, tested to 90% coverage and shipped with care.
           </motion.p>
 
           <motion.div

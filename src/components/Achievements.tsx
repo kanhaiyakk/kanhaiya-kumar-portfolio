@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Trophy, Code, Award, ExternalLink } from "lucide-react";
+import { Trophy, Code, Award, ExternalLink, Sparkles } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
 import { SectionHeading } from "./SectionHeading";
 
@@ -62,6 +62,42 @@ export function Achievements() {
                   <div>
                     <h4 className="font-bold text-base mb-1">Microsoft Certified: Azure Fundamentals</h4>
                     <p className="text-sm text-muted-foreground">Microsoft</p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-5 hover-lift bg-gradient-card border-border/50">
+                <div className="flex items-start gap-4">
+                  <div className="p-2.5 rounded-lg gradient-primary"><Sparkles className="h-5 w-5 text-primary-foreground" /></div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-base mb-1">Generative AI Fundamentals</h4>
+                    <p className="text-sm text-muted-foreground mb-2">Databricks</p>
+                    <a
+                      href="https://credentials.databricks.com/32c7a21c-3df9-40a7-b71d-f84effe0015e"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
+                    >
+                      Verify credential <ExternalLink className="h-3 w-3" />
+                    </a>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-5 hover-lift bg-gradient-card border-border/50">
+                <div className="flex items-start gap-4">
+                  <div className="p-2.5 rounded-lg gradient-primary"><Sparkles className="h-5 w-5 text-primary-foreground" /></div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-base mb-1">AI / LLM Engineering Certification</h4>
+                    <p className="text-sm text-muted-foreground mb-2">Skilljar</p>
+                    <a
+                      href="https://verify.skilljar.com/c/uqtyytyptppt"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
+                    >
+                      Verify credential <ExternalLink className="h-3 w-3" />
+                    </a>
                   </div>
                 </div>
               </Card>

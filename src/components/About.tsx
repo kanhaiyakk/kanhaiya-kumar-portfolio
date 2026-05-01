@@ -1,14 +1,14 @@
 import { Card } from "@/components/ui/card";
-import { Code2, Database, TestTube, Award } from "lucide-react";
+import { Code2, Database, TestTube, Sparkles } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
 import { SectionHeading } from "./SectionHeading";
 
 export function About() {
   const highlights = [
-    { icon: Code2, title: "Clean Architecture", description: "Expert in Hexagonal Architecture with 85-90%+ test coverage" },
-    { icon: Database, title: "Database Optimization", description: "Proven track record of 15% performance improvements" },
-    { icon: TestTube, title: "Test-Driven Development", description: "JUnit & Mockito expert ensuring maintainable code" },
-    { icon: Award, title: "Problem Solver", description: "500+ DSA problems solved across platforms" },
+    { icon: Sparkles, title: "AI-Powered Backend", description: "Gemini 2.0 Flash LLM integration, ~90% CV parsing accuracy & AI fitness scoring" },
+    { icon: Database, title: "Semantic Search", description: "pgvector + 768-d embeddings for real-time auto-suggestion at scale" },
+    { icon: Code2, title: "Hexagonal Architecture", description: "Java 21 & Spring Boot with cleanly separated AI, persistence & file adapters" },
+    { icon: TestTube, title: "Test-Driven Delivery", description: "JUnit & Mockito with 85–90%+ coverage and 40% faster CI/CD pipelines" },
   ];
 
   return (
@@ -20,13 +20,13 @@ export function About() {
           <ScrollReveal direction="left">
             <div className="space-y-5">
               <p className="text-lg text-foreground/90 leading-relaxed">
-                I'm a <span className="font-semibold text-primary">Backend Developer</span> skilled in building <span className="font-semibold text-foreground">scalable, high-performance applications</span> using <span className="font-semibold text-accent">Java, Spring Boot, and REST APIs</span>. Proficient in both monolithic and microservices architectures, with expertise in bug fixing, performance optimization, and clean code.
+                I'm a <span className="font-semibold text-primary">Backend Developer</span> building <span className="font-semibold text-foreground">AI-powered, production-grade systems</span> with <span className="font-semibold text-accent">Java 21, Spring Boot and Hexagonal Architecture</span>. At <span className="font-semibold text-primary">Duru Cooperation</span> I architect LLM-driven features — CV parsing, candidate fitness scoring and semantic auto-suggestion — using Google Gemini and pgvector.
               </p>
               <p className="text-lg text-foreground/90 leading-relaxed">
-                I have a <span className="font-semibold text-primary">strong problem-solving background</span> with <span className="font-semibold text-accent">500+ DSA problems solved</span>, and a proven ability to collaborate in Agile teams to deliver impactful solutions across banking and product-based domains.
+                I integrate <span className="font-semibold text-accent">Gemini 2.0 Flash LLMs</span>, <span className="font-semibold text-foreground">768-d embeddings</span> and <span className="font-semibold text-primary">PostgreSQL pgvector</span> to ship intelligent recruitment workflows — backed by async processing, schema-driven validation and resilient error handling so AI failures never block the user.
               </p>
               <p className="text-lg text-foreground/90 leading-relaxed">
-                My approach emphasizes <span className="font-semibold text-accent">clean, testable, maintainable code</span> — implementing <span className="font-semibold text-primary">Hexagonal Architecture</span> and consistently achieving <span className="font-semibold text-foreground">85-90%+ test coverage</span> with JUnit and Mockito.
+                I care about <span className="font-semibold text-accent">clean, testable, maintainable code</span> — Hexagonal boundaries, <span className="font-semibold text-foreground">85–90%+ JUnit/Mockito coverage</span>, and a <span className="font-semibold text-primary">40% faster CI/CD pipeline</span>. Backed by <span className="font-semibold text-accent">500+ DSA problems</span> solved across LeetCode, GFG and HackerRank.
               </p>
             </div>
           </ScrollReveal>
