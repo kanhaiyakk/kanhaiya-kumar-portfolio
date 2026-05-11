@@ -10,7 +10,7 @@ const experiences = [
     period: "July 2025 - Present",
     location: "Bengaluru, India",
     techStack: "Java 21 · Spring Boot · Hexagonal Architecture · Google Gemini · PostgreSQL · pgvector · REST",
-    product: "Duruper – Global Recruitment Platform",
+    product: "Product: Duruper – Global Recruitment Platform",
     achievements: [
       "Building backend features for Duruper — a global recruitment platform — using Java 21 and Spring Boot following Hexagonal Architecture (Ports & Adapters) principles.",
       "Architected an enterprise-grade AI-powered CV Parsing system integrating Apache Tika and Google Gemini 2.5 Flash LLM, reducing manual resume processing time by ~80% with ~90% parsing accuracy via schema-driven prompt engineering.",
