@@ -70,6 +70,9 @@ export function Experience() {
                       </div>
                       <h3 className="text-xl font-bold mb-1">{exp.role}</h3>
                       <p className="text-base font-semibold text-primary mb-1">{exp.company}</p>
+                      {exp.product && (
+                        <p className="text-sm font-bold text-accent/90 uppercase tracking-wide mb-1">{exp.product}</p>
+                      )}
                       <div className={`flex items-center gap-1.5 text-xs text-muted-foreground mb-3 ${i % 2 === 0 ? "md:justify-end" : ""}`}>
                         <MapPin className="h-3 w-3" /> {exp.location}
                       </div>
