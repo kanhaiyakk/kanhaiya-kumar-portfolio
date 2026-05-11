@@ -9,7 +9,8 @@ const experiences = [
     role: "Backend Developer – Product Development",
     period: "July 2025 - Present",
     location: "Bengaluru, India",
-    techStack: "Duruper (Global Recruitment Platform) · Java 21 · Spring Boot · Hexagonal Architecture · Google Gemini · PostgreSQL · pgvector · REST",
+    techStack: "Java 21 · Spring Boot · Hexagonal Architecture · Google Gemini · PostgreSQL · pgvector · REST",
+    product: "Duruper – Global Recruitment Platform",
     achievements: [
       "Building backend features for Duruper — a global recruitment platform — using Java 21 and Spring Boot following Hexagonal Architecture (Ports & Adapters) principles.",
       "Architected an enterprise-grade AI-powered CV Parsing system integrating Apache Tika and Google Gemini 2.5 Flash LLM, reducing manual resume processing time by ~80% with ~90% parsing accuracy via schema-driven prompt engineering.",
@@ -31,7 +32,7 @@ const experiences = [
       "Designed scalable RESTful APIs with Spring Boot, improving response times by 10%.",
       "Optimized database queries using JPA and MySQL, reducing retrieval times by 15%.",
       "Achieved 90%+ test coverage via comprehensive unit and integration tests.",
-      "Conducted 50+ technical interviews for Java backend developer positions.",
+      "Conducted 100+ technical interviews for Java backend developer positions.",
     ],
   },
   {
@@ -69,6 +70,9 @@ export function Experience() {
                       </div>
                       <h3 className="text-xl font-bold mb-1">{exp.role}</h3>
                       <p className="text-base font-semibold text-primary mb-1">{exp.company}</p>
+                      {exp.product && (
+                        <p className="text-sm font-bold text-accent/90 uppercase tracking-wide mb-1">{exp.product}</p>
+                      )}
                       <div className={`flex items-center gap-1.5 text-xs text-muted-foreground mb-3 ${i % 2 === 0 ? "md:justify-end" : ""}`}>
                         <MapPin className="h-3 w-3" /> {exp.location}
                       </div>
