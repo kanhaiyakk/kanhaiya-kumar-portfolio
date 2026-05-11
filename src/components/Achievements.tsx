@@ -107,7 +107,7 @@ export function Achievements() {
                   <div className="p-2.5 rounded-lg gradient-primary"><Award className="h-5 w-5 text-primary-foreground" /></div>
                   <div>
                     <h4 className="font-bold text-base mb-1">Technical Interviewer</h4>
-                    <p className="text-sm text-muted-foreground">Conducted 50+ interviews for Java backend roles</p>
+                    <p className="text-sm text-muted-foreground">Conducted 100+ interviews for Java backend roles</p>
                   </div>
                 </div>
               </Card>
