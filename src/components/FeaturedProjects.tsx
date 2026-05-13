@@ -20,7 +20,7 @@ function CVParsingContent() {
       <div>
         <h4 className="font-semibold text-sm text-primary mb-3">Technology Stack</h4>
         <div className="flex flex-wrap gap-2">
-          {["Java 21", "Spring Boot", "Hexagonal Architecture", "Apache Tika 2.9.1", "Gemini 2.5 Flash", "PostgreSQL", "JPA", "REST API", "JWT", "Swagger"].map((t) => (
+          {["Java 21", "Spring Boot", "Hexagonal Architecture", "Apache Tika 2.9.1", "Gemini 2.5 Flash", "PostgreSQL", "JPA", "REST API", "JWT", "Swagger", "Rate Limiting"].map((t) => (
             <Badge key={t} variant="outline" className="text-sm">{t}</Badge>
           ))}
         </div>
@@ -30,7 +30,7 @@ function CVParsingContent() {
         <div className="space-y-3">
           <h4 className="text-lg font-semibold flex items-center gap-2"><Zap className="h-5 w-5 text-primary" /> Key Features</h4>
           <ul className="space-y-2">
-            {["Automated extraction into validated JSON", "One-click profile auto-population", "Multi-format support (PDF, DOCX, RTF, ODT, TXT)", "Schema-driven JSON validation", "Atomic transactional persistence"].map((f) => (
+            {["Automated extraction into validated JSON", "One-click profile auto-population", "Multi-format support (PDF, DOCX, RTF, ODT, TXT)", "Schema-driven JSON validation", "Rate limiting for secure & scalable API consumption", "Atomic transactional persistence"].map((f) => (
               <li key={f} className="flex items-start gap-2 text-sm"><CheckCircle className="h-4 w-4 text-accent mt-0.5 flex-shrink-0" /><span className="text-muted-foreground">{f}</span></li>
             ))}
           </ul>
@@ -38,7 +38,7 @@ function CVParsingContent() {
         <div className="space-y-3">
           <h4 className="text-lg font-semibold flex items-center gap-2"><TrendingUp className="h-5 w-5 text-primary" /> Impact</h4>
           <ul className="space-y-2">
-            {["~90% parsing accuracy via prompt engineering", "Manual data entry reduced to seconds", "2–5s LLM response at $0.075 per 1M tokens", "Provider-agnostic — easy LLM swap", "Structured error handling with HTTP responses"].map((f) => (
+            {["~90% parsing accuracy via prompt engineering", "Manual data entry reduced to seconds", "2–5s LLM response at $0.075 per 1M tokens", "Improved stability under high traffic via rate limiting", "Provider-agnostic — easy LLM swap", "Structured error handling with HTTP responses"].map((f) => (
               <li key={f} className="flex items-start gap-2 text-sm"><CheckCircle className="h-4 w-4 text-accent mt-0.5 flex-shrink-0" /><span className="text-muted-foreground">{f}</span></li>
             ))}
           </ul>

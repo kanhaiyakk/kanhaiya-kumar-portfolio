@@ -8,7 +8,7 @@ export function Skills() {
   const categories = [
     { title: "Languages", skills: ["Java 21"] },
     { title: "Frameworks", skills: ["Spring Boot", "Spring MVC", "Spring Data JPA", "Spring Security", "Hibernate"] },
-    { title: "Backend & Architecture", skills: ["REST APIs", "Microservices", "Hexagonal Architecture"] },
+    { title: "Backend & Architecture", skills: ["REST APIs", "Microservices", "Hexagonal Architecture", "Rate Limiting"] },
     { title: "AI / Intelligent Systems", skills: ["LLM Integration", "Google Gemini API", "AI-powered CV Parsing", "Semantic Search", "Embeddings", "AI-driven Backend Systems", "Document Processing", "pgvector"] },
     { title: "Databases", skills: ["MySQL", "PostgreSQL", "pgvector"] },
     { title: "Tools", skills: ["Gradle", "Git", "GitHub", "Docker", "Postman", "Swagger", "Sentry", "Jira"] },

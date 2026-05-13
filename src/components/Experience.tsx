@@ -13,7 +13,7 @@ const experiences = [
     product: "Product: Duruper – Global Recruitment Platform",
     achievements: [
       "Building backend features for Duruper — a global recruitment platform — using Java 21 and Spring Boot following Hexagonal Architecture (Ports & Adapters) principles.",
-      "Architected an enterprise-grade AI-powered CV Parsing system integrating Apache Tika and Google Gemini 2.5 Flash LLM, reducing manual resume processing time by ~80% with ~90% parsing accuracy via schema-driven prompt engineering.",
+      "Architected an enterprise-grade AI-powered CV Parsing system integrating Apache Tika and Google Gemini 2.5 Flash LLM, with rate limiting for secure and scalable API consumption — reducing manual resume processing time by ~80% with ~90% parsing accuracy via schema-driven prompt engineering.",
       "Built an AI Candidate Fitness Scoring system that generates 0–100 job-fit scores using Gemini LLM, enabling recruiters to rank and filter applicants quickly with async, resilient pipelines.",
       "Developed an AI job classification engine using Gemini embeddings (768-d) and PostgreSQL pgvector cosine similarity — analyzing job title, description and skills to auto-suggest Job Function & Industry in real time.",
       "Designed scalable REST APIs and Swagger-friendly contracts to integrate Duruper's frontend and external systems with reliable throughput and clean integration boundaries.",
