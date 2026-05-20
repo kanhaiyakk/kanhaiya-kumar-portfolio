@@ -1,0 +1,11 @@
+# Kanhaiya Kumar — Portfolio
+
+> Portfolio of Kanhaiya Kumar, a Java backend developer building scalable microservices, REST APIs, and AI-powered systems with Spring Boot, Hexagonal Architecture, Google Gemini LLMs, and pgvector semantic search.
+
+## Pages
+
+- [Home](/): About, skills, experience, featured projects, achievements, and contact information.
+
+## Resources
+
+- [Resume (PDF)](/Kanhaiya_Kumar_Resume.pdf): Latest resume.

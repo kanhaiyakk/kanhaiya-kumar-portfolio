@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://kanhaiya-kumar-portfolio.lovable.app/sitemap.xml
