@@ -42,7 +42,7 @@ export function Hero() {
               <img
                 src={profilePhoto}
                 alt="Kanhaiya Kumar — Java Backend Developer"
-                className="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-2 border-background"
+                className="w-28 h-28 md:w-32 md:h-32 rounded-full object-contain bg-black border-2 border-background"
               />
             </div>
           </motion.div>
