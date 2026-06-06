@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Github, ExternalLink } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
 import { SectionHeading } from "./SectionHeading";
+import { TiltCard } from "./TiltCard";
 
 const projects = [
   {
@@ -41,7 +42,8 @@ export function Projects() {
         <div className="grid md:grid-cols-2 gap-6">
           {projects.map((p, i) => (
             <ScrollReveal key={i} delay={i * 0.1}>
-              <Card className="p-7 hover-lift bg-gradient-card border-border/50 flex flex-col h-full">
+              <TiltCard className="h-full">
+              <Card className="p-7 glass border-border/50 flex flex-col h-full transition-smooth hover:shadow-glow">
                 <h3 className="text-xl font-bold mb-2">{p.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{p.description}</p>
 
@@ -63,7 +65,7 @@ export function Projects() {
                   </div>
                 </div>
 
-                <div className="mt-auto flex gap-3">
+                <div className="mt-auto flex gap-3 relative z-10">
                   <Button asChild className="flex-1 gradient-primary text-primary-foreground hover:opacity-90 shadow-glow">
                     <a href={p.github} target="_blank" rel="noopener noreferrer">
                       <Github className="mr-2 h-4 w-4" /> View Code
@@ -76,6 +78,7 @@ export function Projects() {
                   </Button>
                 </div>
               </Card>
+              </TiltCard>
             </ScrollReveal>
           ))}
         </div>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import profilePhoto from "@/assets/Kanhaiya_profile_photo.jpg";
 import { HeroCanvas } from "./three/HeroCanvas";
+import { MagneticButton } from "./MagneticButton";
 
 const roles = [
   "Java Backend Developer",
@@ -28,6 +29,11 @@ export function Hero() {
       </div>
       {/* Gradient mask so text remains readable */}
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/30 md:from-background/95 md:via-background/70 md:to-background/10 pointer-events-none" />
+
+      {/* Animated light streaks */}
+      <div className="light-streaks">
+        <span /><span /><span /><span />
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-16">
         {/* Left: copy */}
@@ -93,30 +99,38 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.65 }}
             className="flex flex-wrap gap-3 md:justify-start justify-center"
           >
-            <a href="/Kanhaiya_Kumar_Resume.pdf" download="Kanhaiya_Kumar_Resume.pdf">
-              <Button size="lg" className="gradient-primary hover:opacity-90 transition-smooth shadow-glow text-primary-foreground">
-                <Download className="mr-2 h-5 w-5" /> Download Resume
+            <MagneticButton>
+              <a href="/Kanhaiya_Kumar_Resume.pdf" download="Kanhaiya_Kumar_Resume.pdf">
+                <Button size="lg" className="gradient-primary hover:opacity-90 transition-smooth shadow-glow text-primary-foreground">
+                  <Download className="mr-2 h-5 w-5" /> Download Resume
+                </Button>
+              </a>
+            </MagneticButton>
+            <MagneticButton>
+              <Button size="lg" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10 transition-smooth"
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
+                <Mail className="mr-2 h-5 w-5" /> Contact
               </Button>
-            </a>
-            <Button size="lg" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10 transition-smooth"
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
-              <Mail className="mr-2 h-5 w-5" /> Contact
-            </Button>
-            <Button asChild size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10">
-              <a href="https://github.com/kanhaiyakk" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub profile">
-                <Github className="h-5 w-5" />
-              </a>
-            </Button>
-            <Button asChild size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10">
-              <a
-                href="https://www.linkedin.com/in/kanhaiya20598/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open LinkedIn profile"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-            </Button>
+            </MagneticButton>
+            <MagneticButton>
+              <Button asChild size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10">
+                <a href="https://github.com/kanhaiyakk" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub profile">
+                  <Github className="h-5 w-5" />
+                </a>
+              </Button>
+            </MagneticButton>
+            <MagneticButton>
+              <Button asChild size="icon" variant="outline" className="border-primary/40 hover:border-primary hover:bg-primary/10">
+                <a
+                  href="https://www.linkedin.com/in/kanhaiya20598/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open LinkedIn profile"
+                >
+                  <Linkedin className="h-5 w-5" />
+                </a>
+              </Button>
+            </MagneticButton>
           </motion.div>
         </div>
 

@@ -158,6 +158,128 @@
     z-index: 0;
     pointer-events: none;
   }
+
+  /* ---------- Custom animated cursor ---------- */
+  .cursor-dot,
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 9999px;
+    mix-blend-mode: screen;
+  }
+  .cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: hsl(var(--primary));
+    box-shadow: 0 0 12px hsl(var(--primary) / 0.9);
+  }
+  .cursor-ring {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid hsl(var(--primary) / 0.6);
+    transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+  .cursor-ring--active {
+    width: 58px;
+    height: 58px;
+    border-color: hsl(var(--accent) / 0.8);
+    background: hsl(var(--accent) / 0.08);
+  }
+  @media (pointer: coarse) {
+    .cursor-dot, .cursor-ring { display: none; }
+  }
+
+  /* ---------- 3D tilt card glow ---------- */
+  .tilt-card {
+    transform-style: preserve-3d;
+  }
+  .tilt-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      220px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+      hsl(var(--primary) / 0.7),
+      hsl(var(--accent) / 0.35) 40%,
+      transparent 70%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: var(--glow-o, 0);
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .tilt-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      300px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+      hsl(var(--primary) / 0.12),
+      transparent 60%
+    );
+    opacity: var(--glow-o, 0);
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ---------- Neon glow border (static) ---------- */
+  .neon-border {
+    position: relative;
+  }
+  .neon-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.5), transparent 40%, hsl(var(--accent) / 0.4));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .neon-border:hover::before { opacity: 1; }
+
+  /* ---------- Animated light streaks ---------- */
+  .light-streaks {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .light-streaks span {
+    position: absolute;
+    top: -20%;
+    height: 140%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, hsl(var(--primary) / 0.5), transparent);
+    animation: streak 8s linear infinite;
+    opacity: 0.4;
+  }
+  .light-streaks span:nth-child(2) { left: 25%; animation-duration: 11s; animation-delay: 2s; background: linear-gradient(to bottom, transparent, hsl(var(--accent) / 0.5), transparent); }
+  .light-streaks span:nth-child(3) { left: 55%; animation-duration: 9s; animation-delay: 1s; }
+  .light-streaks span:nth-child(4) { left: 78%; animation-duration: 13s; animation-delay: 4s; background: linear-gradient(to bottom, transparent, hsl(var(--accent) / 0.4), transparent); }
+  .light-streaks span:nth-child(1) { left: 8%; }
+}
+
+@keyframes streak {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 0.5; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(100%); opacity: 0; }
 }
 
 @keyframes shimmer {
