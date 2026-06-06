@@ -133,7 +133,7 @@ export function FeaturedProjects() {
               </TabsTrigger>
             </TabsList>
 
-            <Card className="p-6 md:p-10 bg-gradient-card border-border/50 hover-lift">
+            <Card className="p-6 md:p-10 glass neon-border border-border/50 transition-smooth hover:shadow-glow">
               <TabsContent value="cv-parsing" className="mt-0"><CVParsingContent /></TabsContent>
               <TabsContent value="fitness-scoring" className="mt-0"><FitnessContent /></TabsContent>
               <TabsContent value="auto-suggestion" className="mt-0"><AutoSuggestionContent /></TabsContent>
