@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Code2, Database, TestTube, Sparkles } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
 import { SectionHeading } from "./SectionHeading";
+import { TiltCard } from "./TiltCard";
 
 export function About() {
   const highlights = [
@@ -34,13 +35,15 @@ export function About() {
           <div className="grid sm:grid-cols-2 gap-4">
             {highlights.map((h, i) => (
               <ScrollReveal key={i} delay={i * 0.1} direction="right">
-                <Card className="p-5 hover-lift bg-gradient-card backdrop-blur border-border/50 h-full">
+                <TiltCard className="h-full">
+                <Card className="p-5 glass border-border/50 h-full transition-smooth hover:shadow-glow">
                   <div className="p-2.5 rounded-lg gradient-primary inline-block mb-3">
                     <h.icon className="h-5 w-5 text-primary-foreground" />
                   </div>
                   <h3 className="font-semibold text-base mb-1">{h.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{h.description}</p>
                 </Card>
+                </TiltCard>
               </ScrollReveal>
             ))}
           </div>

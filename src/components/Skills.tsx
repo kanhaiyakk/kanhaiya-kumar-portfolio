@@ -35,7 +35,7 @@ export function Skills() {
           <ScrollReveal direction="right">
             <div className="grid sm:grid-cols-2 gap-3">
               {categories.map((c, i) => (
-                <Card key={i} className="p-4 hover-lift bg-gradient-card border-border/50">
+                <Card key={i} className="p-4 glass neon-border border-border/50 transition-smooth hover:-translate-y-1 hover:shadow-glow">
                   <h3 className="font-bold text-sm mb-2 text-primary">{c.title}</h3>
                   <div className="flex flex-wrap gap-1.5">
                     {c.skills.map((s) => (
