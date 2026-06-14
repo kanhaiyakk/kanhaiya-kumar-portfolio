@@ -20,7 +20,15 @@ export function Skills() {
   ];
 
   const [active, setActive] = useState<string | null>(null);
-  const planets = categories.map(({ title, color, size }) => ({ title, color, size }));
+  const topSkills = [
+    { title: "Java", color: "#22d3ee", size: 0.3 },
+    { title: "Spring Boot", color: "#34d399", size: 0.3 },
+    { title: "AI / LLM", color: "#c084fc", size: 0.32 },
+    { title: "REST APIs", color: "#67e8f9", size: 0.26 },
+    { title: "Microservices", color: "#a855f7", size: 0.28 },
+    { title: "Databases", color: "#f0abfc", size: 0.26 },
+  ];
+  const planets = topSkills;
   const toggle = (title: string) => setActive((prev) => (prev === title ? null : title));
 
   return (
@@ -45,11 +53,7 @@ export function Skills() {
               {categories.map((c, i) => (
                 <Card
                   key={i}
-                  onMouseEnter={() => setActive(c.title)}
-                  onClick={() => toggle(c.title)}
-                  className={`cursor-pointer p-4 glass neon-border border-border/50 transition-smooth hover:-translate-y-1 hover:shadow-glow ${
-                    active === c.title ? "ring-2 ring-primary shadow-glow -translate-y-1" : ""
-                  } ${active && active !== c.title ? "opacity-50" : ""}`}
+                  className="p-4 glass neon-border border-border/50 transition-smooth hover:-translate-y-1 hover:shadow-glow"
                 >
                   <h3 className="font-bold text-sm mb-2 flex items-center gap-2" style={{ color: c.color }}>
                     <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: c.color }} />
