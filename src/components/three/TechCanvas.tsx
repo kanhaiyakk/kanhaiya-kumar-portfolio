@@ -1,7 +1,13 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, OrbitControls, Stars, Sphere } from "@react-three/drei";
-import { forwardRef, Suspense, useRef, useMemo } from "react";
+import { Float, MeshDistortMaterial, OrbitControls, Stars, Sphere, Html, Trail } from "@react-three/drei";
+import { forwardRef, Suspense, useRef, useState } from "react";
 import * as THREE from "three";
+
+export type SkillPlanet = {
+  title: string;
+  color: string;
+  size: number;
+};
 
 const CoreOrb = forwardRef<THREE.Mesh>(function CoreOrb(_, forwardedRef) {
   const ref = useRef<THREE.Mesh | null>(null);
@@ -103,7 +109,91 @@ function Atmosphere() {
   );
 }
 
-export function TechCanvas() {
+type PlanetProps = {
+  data: SkillPlanet;
+  radius: number;
+  speed: number;
+  offset: number;
+  tilt: number;
+  active: boolean;
+  onSelect: (title: string) => void;
+};
+
+function Planet({ data, radius, speed, offset, tilt, active, onSelect }: PlanetProps) {
+  const group = useRef<THREE.Group>(null);
+  const mesh = useRef<THREE.Mesh>(null);
+  const [hovered, setHovered] = useState(false);
+
+  useFrame((state) => {
+    const t = state.clock.elapsedTime * speed + offset;
+    if (group.current) {
+      group.current.position.x = Math.cos(t) * radius;
+      group.current.position.z = Math.sin(t) * radius;
+      group.current.position.y = Math.sin(t) * Math.tan(tilt) * 0.4;
+    }
+    if (mesh.current) {
+      mesh.current.rotation.y += 0.01;
+      const target = hovered || active ? 1.4 : 1;
+      mesh.current.scale.lerp(new THREE.Vector3(target, target, target), 0.12);
+    }
+  });
+
+  const highlight = hovered || active;
+
+  return (
+    <group ref={group}>
+      <Trail width={highlight ? 3 : 1.5} length={6} color={data.color} attenuation={(w) => w * w} decay={1}>
+        <mesh
+          ref={mesh}
+          onPointerOver={(e) => {
+            e.stopPropagation();
+            setHovered(true);
+            document.body.style.cursor = "pointer";
+          }}
+          onPointerOut={() => {
+            setHovered(false);
+            document.body.style.cursor = "auto";
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+            onSelect(data.title);
+          }}
+        >
+          <sphereGeometry args={[data.size, 32, 32]} />
+          <meshStandardMaterial
+            color={data.color}
+            emissive={data.color}
+            emissiveIntensity={highlight ? 1.4 : 0.6}
+            metalness={0.6}
+            roughness={0.25}
+          />
+        </mesh>
+      </Trail>
+      <Html center distanceFactor={9} position={[0, data.size + 0.35, 0]}>
+        <div
+          onClick={() => onSelect(data.title)}
+          style={{ cursor: "pointer" }}
+          className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[11px] font-semibold transition-all duration-200 ${
+            highlight
+              ? "bg-primary text-primary-foreground scale-110 shadow-lg"
+              : "bg-background/70 text-foreground/80 backdrop-blur-sm"
+          }`}
+        >
+          {data.title}
+        </div>
+      </Html>
+    </group>
+  );
+}
+
+type TechCanvasProps = {
+  planets?: SkillPlanet[];
+  active?: string | null;
+  onSelect?: (title: string) => void;
+};
+
+export function TechCanvas({ planets = [], active = null, onSelect = () => {} }: TechCanvasProps) {
+  const ringRadii = [2.2, 2.7, 3.2, 3.7];
   return (
     <Canvas
       dpr={[1, 1.8]}
@@ -123,15 +213,28 @@ export function TechCanvas() {
           <Atmosphere />
         </Float>
 
-        <Ring radius={2.4} tilt={Math.PI / 2.4} color="#22d3ee" speed={0.12} />
-        <Ring radius={2.8} tilt={Math.PI / 3} color="#a855f7" speed={-0.08} />
-        <Ring radius={3.2} tilt={Math.PI / 2.1} color="#67e8f9" speed={0.06} />
+        {ringRadii.map((r, i) => (
+          <Ring
+            key={r}
+            radius={r}
+            tilt={Math.PI / 2.2}
+            color={i % 2 === 0 ? "#22d3ee" : "#a855f7"}
+            speed={i % 2 === 0 ? 0.08 : -0.06}
+          />
+        ))}
 
-        <OrbitingShape radius={2.4} speed={0.45} offset={0} color="#22d3ee" kind="sphere" size={0.16} />
-        <OrbitingShape radius={2.4} speed={0.45} offset={Math.PI * 0.66} color="#a855f7" kind="ico" size={0.2} />
-        <OrbitingShape radius={2.4} speed={0.45} offset={Math.PI * 1.33} color="#f0abfc" kind="sphere" size={0.14} />
-        <OrbitingShape radius={3.2} speed={-0.3} offset={Math.PI * 0.4} color="#67e8f9" kind="sphere" size={0.1} />
-        <OrbitingShape radius={3.2} speed={-0.3} offset={Math.PI * 1.4} color="#c084fc" kind="sphere" size={0.16} />
+        {planets.map((p, i) => (
+          <Planet
+            key={p.title}
+            data={p}
+            radius={ringRadii[i % ringRadii.length]}
+            speed={(i % 2 === 0 ? 0.32 : -0.28) - i * 0.01}
+            offset={(i / Math.max(planets.length, 1)) * Math.PI * 2}
+            tilt={0.25}
+            active={active === p.title}
+            onSelect={onSelect}
+          />
+        ))}
 
         <OrbitControls
           enableZoom={false}
