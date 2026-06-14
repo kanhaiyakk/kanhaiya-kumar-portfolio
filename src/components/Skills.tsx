@@ -53,11 +53,7 @@ export function Skills() {
               {categories.map((c, i) => (
                 <Card
                   key={i}
-                  onMouseEnter={() => setActive(c.title)}
-                  onClick={() => toggle(c.title)}
-                  className={`cursor-pointer p-4 glass neon-border border-border/50 transition-smooth hover:-translate-y-1 hover:shadow-glow ${
-                    active === c.title ? "ring-2 ring-primary shadow-glow -translate-y-1" : ""
-                  } ${active && active !== c.title ? "opacity-50" : ""}`}
+                  className="p-4 glass neon-border border-border/50 transition-smooth hover:-translate-y-1 hover:shadow-glow"
                 >
                   <h3 className="font-bold text-sm mb-2 flex items-center gap-2" style={{ color: c.color }}>
                     <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: c.color }} />
