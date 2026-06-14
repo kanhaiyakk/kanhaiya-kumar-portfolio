@@ -33,8 +33,8 @@ const CoreOrb = forwardRef<THREE.Mesh>(function CoreOrb(_, forwardedRef) {
         emissiveIntensity={0.5}
         roughness={0.2}
         metalness={0.8}
-        distort={0.3}
-        speed={1.4}
+        distort={0.05}
+        speed={0.8}
       />
     </mesh>
   );
