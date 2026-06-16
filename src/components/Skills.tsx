@@ -26,7 +26,7 @@ export function Skills() {
     { title: "AI / LLM", color: "#c084fc", size: 0.32 },
     { title: "REST APIs", color: "#67e8f9", size: 0.26 },
     { title: "Microservices", color: "#a855f7", size: 0.28 },
-    { title: "Databases", color: "#f0abfc", size: 0.26 },
+    { title: "PostgreSQL", color: "#f0abfc", size: 0.26 },
   ];
   const planets = topSkills;
   const toggle = (title: string) => setActive((prev) => (prev === title ? null : title));
