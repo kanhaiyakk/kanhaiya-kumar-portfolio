@@ -36,10 +36,10 @@ export function Skills() {
       <div className="max-w-7xl mx-auto">
         <SectionHeading title="Skills & Tech Stack" subtitle="The tools I use to design, build, and ship reliable systems." />
 
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          {/* 3D tech cluster */}
-          <ScrollReveal direction="left">
-            <div className="relative h-[460px] rounded-2xl glass border border-border/50 overflow-hidden">
+        <div className="space-y-10">
+          {/* 3D tech cluster — full width, large */}
+          <ScrollReveal direction="up">
+            <div className="relative h-[480px] md:h-[600px] rounded-2xl glass border border-border/50 overflow-hidden">
               <TechCanvas planets={planets} active={active} onSelect={toggle} />
               <div className="pointer-events-none absolute bottom-3 left-0 right-0 text-center text-xs text-muted-foreground">
                 Tap a planet to explore that skill orbit
@@ -47,9 +47,9 @@ export function Skills() {
             </div>
           </ScrollReveal>
 
-          {/* Skill cards */}
-          <ScrollReveal direction="right">
-            <div className="grid sm:grid-cols-2 gap-3">
+          {/* Skill cards below the animation */}
+          <ScrollReveal direction="up">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {categories.map((c, i) => (
                 <Card
                   key={i}
