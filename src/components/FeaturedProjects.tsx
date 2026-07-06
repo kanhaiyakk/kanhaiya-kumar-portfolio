@@ -194,8 +194,11 @@ export function FeaturedProjects() {
         <SectionHeading title="Featured Projects" subtitle="Production AI-powered systems I designed and shipped." />
 
         <ScrollReveal>
-          <Tabs defaultValue="cv-parsing" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-8 h-auto p-1 bg-card/60 backdrop-blur border border-border/50">
+          <Tabs defaultValue="whatsapp-recruitment" className="w-full">
+            <TabsList className="grid w-full grid-cols-4 mb-8 h-auto p-1 bg-card/60 backdrop-blur border border-border/50">
+              <TabsTrigger value="whatsapp-recruitment" className="flex items-center gap-2 py-3 text-sm data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
+                <MessageSquare className="h-4 w-4" /> <span className="hidden sm:inline">WhatsApp Recruitment</span><span className="sm:hidden">WhatsApp</span>
+              </TabsTrigger>
               <TabsTrigger value="cv-parsing" className="flex items-center gap-2 py-3 text-sm data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
                 <Sparkles className="h-4 w-4" /> <span className="hidden sm:inline">AI CV Parsing</span><span className="sm:hidden">CV</span>
               </TabsTrigger>
@@ -208,6 +211,7 @@ export function FeaturedProjects() {
             </TabsList>
 
             <Card className="p-6 md:p-10 glass neon-border border-border/50 transition-smooth hover:shadow-glow">
+              <TabsContent value="whatsapp-recruitment" className="mt-0"><WhatsAppContent /></TabsContent>
               <TabsContent value="cv-parsing" className="mt-0"><CVParsingContent /></TabsContent>
               <TabsContent value="fitness-scoring" className="mt-0"><FitnessContent /></TabsContent>
               <TabsContent value="auto-suggestion" className="mt-0"><AutoSuggestionContent /></TabsContent>
