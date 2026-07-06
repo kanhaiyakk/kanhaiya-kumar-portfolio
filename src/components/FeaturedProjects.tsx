@@ -6,6 +6,80 @@ import { ScrollReveal } from "./ScrollReveal";
 import { SectionHeading } from "./SectionHeading";
 import { AutoSuggestionContent } from "./AutoSuggestionContent";
 
+function WhatsAppContent() {
+  return (
+    <div className="space-y-8">
+      <div>
+        <Badge className="mb-4 gradient-primary border-0 text-primary-foreground">Backend Integration · Recruitment Automation</Badge>
+        <h3 className="text-2xl md:text-3xl font-bold mb-3">WhatsApp Recruitment Integration — End-to-End Hiring Funnel in Chat</h3>
+        <p className="text-muted-foreground leading-relaxed">
+          Built a complete <strong className="text-foreground">WhatsApp-based hiring funnel</strong> for a job platform where candidates go from job invitation to paid membership without leaving the chat — consent SMS, Meta-approved template, guided sign-up, one-tap job application, and Razorpay membership purchase, all inside a single WhatsApp conversation.
+        </p>
+      </div>
+
+      <div>
+        <h4 className="font-semibold text-sm text-primary mb-3">Technology Stack</h4>
+        <div className="flex flex-wrap gap-2">
+          {["Java", "Spring Boot", "JPA/QueryDSL", "PostgreSQL", "Meta WhatsApp Cloud API", "MSG91", "Twilio", "Razorpay", "Sentry", "Hexagonal Architecture"].map((t) => (
+            <Badge key={t} variant="outline" className="text-sm">{t}</Badge>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-6">
+        <div className="space-y-3">
+          <h4 className="text-lg font-semibold flex items-center gap-2"><Zap className="h-5 w-5 text-primary" /> Key Highlights</h4>
+          <ul className="space-y-2">
+            {[
+              "Designed a 10-state conversation engine (IDLE → SIGN-UP → APPLY → PAY_COMPLETE) driven by Meta Cloud API webhooks, with state guards and per-phone conversation resolution",
+              "Implemented compliance-first messaging across Meta opt-in and India's TRAI/DLT SMS regulations, with dual-provider routing (MSG91 India, Twilio international)",
+              "Built payment-safe Razorpay integration: payment links delivered in chat, with a non-transactional activation orchestrator so side-effect failures can never roll back a confirmed payment",
+              "Debugged silent webhook failures: Meta sends template button clicks as a separate 'button' event carrying button text instead of developer IDs — fixed with a dedicated handler, payload normalization, and regression tests",
+              "Delivered a recruiter dashboard with conversion metrics, multi-filter search, policy-driven resend, and an hourly scheduled job auto-marking unresponsive invitations with audit trail",
+              "Followed strict hexagonal architecture: thin controllers, immutable domain records, shared UseCases, domain value objects, and PII-masked logging — every PR passed senior architecture review",
+            ].map((f) => (
+              <li key={f} className="flex items-start gap-2 text-sm"><CheckCircle className="h-4 w-4 text-accent mt-0.5 flex-shrink-0" /><span className="text-muted-foreground">{f}</span></li>
+            ))}
+          </ul>
+        </div>
+        <div className="space-y-6">
+          <div className="space-y-3">
+            <h4 className="text-lg font-semibold flex items-center gap-2"><ShieldCheck className="h-5 w-5 text-primary" /> Compliance & Reliability</h4>
+            <ul className="space-y-2">
+              {[
+                "Dual-provider SMS routing keeps messages deliverable across regions",
+                "Non-transactional payment activation eliminates charged-but-not-activated money bugs",
+                "Hourly audit job and policy-driven resend keep recruiters in control",
+              ].map((f) => (
+                <li key={f} className="flex items-start gap-2 text-sm"><CheckCircle className="h-4 w-4 text-accent mt-0.5 flex-shrink-0" /><span className="text-muted-foreground">{f}</span></li>
+              ))}
+            </ul>
+          </div>
+          <div className="space-y-3">
+            <h4 className="text-lg font-semibold flex items-center gap-2"><CreditCard className="h-5 w-5 text-primary" /> Payment Flow</h4>
+            <ul className="space-y-2">
+              {[
+                "Razorpay payment links generated inside the chat thread",
+                "Webhook activation confirmed before entitlement is granted",
+                "Side-effect failures are retried separately without touching the payment record",
+              ].map((f) => (
+                <li key={f} className="flex items-start gap-2 text-sm"><CheckCircle className="h-4 w-4 text-accent mt-0.5 flex-shrink-0" /><span className="text-muted-foreground">{f}</span></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="p-5 bg-muted/40 rounded-lg border border-border/40">
+        <h4 className="text-base font-semibold mb-3 flex items-center gap-2"><RefreshCw className="h-5 w-5 text-primary" /> End-to-End Result</h4>
+        <p className="text-sm text-muted-foreground">
+          Verified end-to-end: invitation → consented → signed up → applied → paid member in ~14 minutes, in a single WhatsApp conversation.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function CVParsingContent() {
   return (
     <div className="space-y-8">
