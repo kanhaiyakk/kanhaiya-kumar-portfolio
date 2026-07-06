@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Sparkles, Brain, Search, TrendingUp, Zap, CheckCircle, Layers, Server } from "lucide-react";
+import { Sparkles, Brain, Search, TrendingUp, Zap, CheckCircle, Layers, Server, MessageSquare, ShieldCheck, CreditCard, RefreshCw } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
 import { SectionHeading } from "./SectionHeading";
 import { AutoSuggestionContent } from "./AutoSuggestionContent";
