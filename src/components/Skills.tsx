@@ -12,7 +12,8 @@ export function Skills() {
     { title: "Backend & Architecture", color: "#67e8f9", size: 0.28, skills: ["REST APIs", "Microservices", "Hexagonal Architecture", "Rate Limiting", "Webhook Integration"] },
     { title: "AI / Intelligent Systems", color: "#c084fc", size: 0.32, skills: ["LLM Integration", "Google Gemini API", "AI-powered CV Parsing", "Semantic Search", "Embeddings", "AI-driven Backend Systems", "Document Processing", "pgvector"] },
     { title: "Databases", color: "#34d399", size: 0.24, skills: ["MySQL", "PostgreSQL", "pgvector"] },
-    { title: "Tools", color: "#f0abfc", size: 0.26, skills: ["Gradle", "Git", "GitHub", "Docker", "Postman", "Swagger", "Sentry", "Jira", "Meta WhatsApp Cloud API", "Razorpay Payment Integration", "MSG91 / Twilio SMS"] },
+    { title: "Tools", color: "#f0abfc", size: 0.26, skills: ["Gradle", "Git", "GitHub", "Docker", "Postman", "Swagger", "Sentry", "Jira"] },
+    { title: "Integrations", color: "#fb7185", size: 0.26, skills: ["Meta WhatsApp Cloud API", "Razorpay Payment Integration", "MSG91 / Twilio SMS"] },
 
     { title: "Testing", color: "#38bdf8", size: 0.2, skills: ["JUnit", "Mockito"] },
     { title: "Cloud", color: "#818cf8", size: 0.24, skills: ["AWS", "Azure"] },
