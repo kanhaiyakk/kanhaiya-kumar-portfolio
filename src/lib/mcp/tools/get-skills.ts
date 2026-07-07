@@ -7,6 +7,7 @@ const skills = [
   { category: "AI / Intelligent Systems", skills: ["LLM Integration", "Google Gemini API", "AI-powered CV Parsing", "Semantic Search", "Embeddings", "Document Processing", "pgvector"] },
   { category: "Databases", skills: ["MySQL", "PostgreSQL", "pgvector"] },
   { category: "Tools", skills: ["Gradle", "Git", "GitHub", "Docker", "Postman", "Swagger", "Sentry", "Jira"] },
+  { category: "Integrations", skills: ["Meta WhatsApp Cloud API", "Razorpay Payment Integration", "MSG91 / Twilio SMS"] },
   { category: "Testing", skills: ["JUnit", "Mockito"] },
   { category: "Cloud", skills: ["AWS", "Azure"] },
   { category: "Core CS", skills: ["DSA", "OOPs", "Collections", "Java 8+"] },
