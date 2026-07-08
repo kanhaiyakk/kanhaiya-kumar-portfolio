@@ -22,15 +22,21 @@ export function Skills() {
   ];
 
   const [active, setActive] = useState<string | null>(null);
-  const topSkills = [
-    { title: "Java", color: "#22d3ee", size: 0.3 },
-    { title: "Spring Boot", color: "#34d399", size: 0.3 },
-    { title: "AI / LLM", color: "#c084fc", size: 0.32 },
-    { title: "REST APIs", color: "#67e8f9", size: 0.26 },
-    { title: "Microservices", color: "#a855f7", size: 0.28 },
-    { title: "PostgreSQL", color: "#f0abfc", size: 0.26 },
+  const nodes = [
+    { title: "Java", color: "#22d3ee", size: 0.26 },
+    { title: "Spring Boot", color: "#34d399", size: 0.28 },
+    { title: "LLM Integration", color: "#c084fc", size: 0.3 },
+    { title: "Google Gemini", color: "#a855f7", size: 0.24 },
+    { title: "AI CV Parsing", color: "#c084fc", size: 0.24 },
+    { title: "Embeddings", color: "#e879f9", size: 0.22 },
+    { title: "pgvector", color: "#34d399", size: 0.2 },
+    { title: "REST APIs", color: "#67e8f9", size: 0.24 },
+    { title: "Microservices", color: "#a855f7", size: 0.26 },
+    { title: "PostgreSQL", color: "#f0abfc", size: 0.24 },
+    { title: "WhatsApp Cloud API", color: "#fb7185", size: 0.24 },
+    { title: "Razorpay", color: "#fb7185", size: 0.22 },
   ];
-  const planets = topSkills;
+  const planets = nodes;
   const toggle = (title: string) => setActive((prev) => (prev === title ? null : title));
 
   return (
@@ -44,7 +50,7 @@ export function Skills() {
             <div className="relative h-[460px] rounded-2xl glass border border-border/50 overflow-hidden">
               <TechCanvas planets={planets} active={active} onSelect={toggle} />
               <div className="pointer-events-none absolute bottom-3 left-0 right-0 text-center text-xs text-muted-foreground">
-                Tap a planet to explore that skill orbit
+                Tap a node to light up its skill connections
               </div>
             </div>
           </ScrollReveal>
