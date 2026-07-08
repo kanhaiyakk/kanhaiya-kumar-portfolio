@@ -1,6 +1,6 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, OrbitControls, Stars, Sphere, Html, Trail } from "@react-three/drei";
-import { forwardRef, Suspense, useRef, useState } from "react";
+import { OrbitControls, Stars, Html } from "@react-three/drei";
+import { Suspense, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
 export type SkillPlanet = {
@@ -9,170 +9,108 @@ export type SkillPlanet = {
   size: number;
 };
 
-const CoreOrb = forwardRef<THREE.Mesh>(function CoreOrb(_, forwardedRef) {
-  const ref = useRef<THREE.Mesh | null>(null);
-
-  const setRef = (node: THREE.Mesh | null) => {
-    ref.current = node;
-    if (typeof forwardedRef === "function") forwardedRef(node);
-    else if (forwardedRef) forwardedRef.current = node;
-  };
-
-  useFrame((state) => {
-    if (!ref.current) return;
-    ref.current.rotation.x = state.clock.elapsedTime * 0.15;
-    ref.current.rotation.y = state.clock.elapsedTime * 0.2;
-  });
-
-  return (
-    <mesh ref={setRef}>
-      <sphereGeometry args={[1.5, 64, 64]} />
-      <MeshDistortMaterial
-        color="#22d3ee"
-        emissive="#0891b2"
-        emissiveIntensity={0.5}
-        roughness={0.2}
-        metalness={0.8}
-        distort={0.05}
-        speed={0.8}
-      />
-    </mesh>
-  );
-});
-
-type OrbitingShapeProps = {
-  radius: number;
-  speed: number;
-  offset: number;
-  color: string;
-  size?: number;
-  kind?: "sphere" | "knot" | "ico";
-};
-
-const OrbitingShape = forwardRef<THREE.Mesh, OrbitingShapeProps>(function OrbitingShape(
-  { radius, speed, offset, color, size = 0.18, kind = "sphere" },
-  forwardedRef,
-) {
-  const ref = useRef<THREE.Mesh | null>(null);
-
-  const setRef = (node: THREE.Mesh | null) => {
-    ref.current = node;
-    if (typeof forwardedRef === "function") forwardedRef(node);
-    else if (forwardedRef) forwardedRef.current = node;
-  };
-
-  useFrame((state) => {
-    if (!ref.current) return;
-    const t = state.clock.elapsedTime * speed + offset;
-    ref.current.position.x = Math.cos(t) * radius;
-    ref.current.position.z = Math.sin(t) * radius;
-    ref.current.position.y = Math.sin(t * 1.6) * 0.6;
-    ref.current.rotation.x += 0.02;
-    ref.current.rotation.y += 0.02;
-  });
-
-  return (
-    <mesh ref={setRef}>
-      {kind === "knot" && <torusKnotGeometry args={[size, size * 0.3, 80, 12]} />}
-      {kind === "ico" && <icosahedronGeometry args={[size, 0]} />}
-      {kind === "sphere" && <sphereGeometry args={[size, 24, 24]} />}
-      <meshStandardMaterial
-        color={color}
-        emissive={color}
-        emissiveIntensity={0.6}
-        metalness={0.7}
-        roughness={0.2}
-      />
-    </mesh>
-  );
-});
-
-function Ring({ radius, tilt, color, speed }: { radius: number; tilt: number; color: string; speed: number }) {
-  const ref = useRef<THREE.Mesh>(null);
-  useFrame((s) => {
-    if (!ref.current) return;
-    ref.current.rotation.z = s.clock.elapsedTime * speed;
-  });
-  return (
-    <mesh ref={ref} rotation={[tilt, 0, 0]}>
-      <torusGeometry args={[radius, 0.012, 16, 200]} />
-      <meshBasicMaterial color={color} transparent opacity={0.55} />
-    </mesh>
-  );
+// Distribute nodes evenly on a sphere shell (Fibonacci sphere)
+function fibonacciSphere(n: number, radius: number): [number, number, number][] {
+  const pts: [number, number, number][] = [];
+  const golden = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < n; i++) {
+    const y = 1 - (i / Math.max(n - 1, 1)) * 2;
+    const r = Math.sqrt(Math.max(0, 1 - y * y));
+    const theta = golden * i;
+    pts.push([Math.cos(theta) * r * radius, y * radius * 0.85, Math.sin(theta) * r * radius]);
+  }
+  return pts;
 }
 
-function Atmosphere() {
-  return (
-    <Sphere args={[1.7, 64, 64]}>
-      <meshBasicMaterial color="#22d3ee" transparent opacity={0.08} side={THREE.BackSide} />
-    </Sphere>
-  );
+// Connect each node to its k nearest neighbours (deduped)
+function buildEdges(pts: [number, number, number][], k = 2): [number, number][] {
+  const seen = new Set<string>();
+  const edges: [number, number][] = [];
+  for (let i = 0; i < pts.length; i++) {
+    const dists = pts
+      .map((p, j) => ({ j, d: dist(pts[i], p) }))
+      .filter((o) => o.j !== i)
+      .sort((a, b) => a.d - b.d)
+      .slice(0, k);
+    for (const { j } of dists) {
+      const key = i < j ? `${i}-${j}` : `${j}-${i}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      edges.push(i < j ? [i, j] : [j, i]);
+    }
+  }
+  return edges;
 }
 
-type PlanetProps = {
+function dist(a: [number, number, number], b: [number, number, number]) {
+  return Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+}
+
+type NodeProps = {
   data: SkillPlanet;
-  radius: number;
-  speed: number;
-  offset: number;
-  tilt: number;
   active: boolean;
+  connected: boolean;
+  register: (g: THREE.Group | null) => void;
   onSelect: (title: string) => void;
 };
 
-function Planet({ data, radius, speed, offset, tilt, active, onSelect }: PlanetProps) {
-  const group = useRef<THREE.Group>(null);
+function Node({ data, active, connected, register, onSelect }: NodeProps) {
   const mesh = useRef<THREE.Mesh>(null);
+  const halo = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
+  const highlight = hovered || active;
 
   useFrame((state) => {
-    const t = state.clock.elapsedTime * speed + offset;
-    if (group.current) {
-      group.current.position.x = Math.cos(t) * radius;
-      group.current.position.z = Math.sin(t) * radius;
-      group.current.position.y = Math.sin(t) * Math.tan(tilt) * 0.4;
-    }
-    if (mesh.current) {
-      mesh.current.rotation.y += 0.01;
-      const target = hovered || active ? 1.4 : 1;
-      mesh.current.scale.lerp(new THREE.Vector3(target, target, target), 0.12);
+    const pulse = 1 + Math.sin(state.clock.elapsedTime * 2 + data.title.length) * 0.06;
+    const target = highlight ? 1.6 : connected ? 1.15 : 1;
+    if (mesh.current) mesh.current.scale.lerp(new THREE.Vector3(target, target, target).multiplyScalar(pulse), 0.15);
+    if (halo.current) {
+      const ht = highlight ? 2.6 : 1.9;
+      halo.current.scale.lerp(new THREE.Vector3(ht, ht, ht), 0.15);
+      (halo.current.material as THREE.MeshBasicMaterial).opacity = highlight ? 0.28 : 0.12;
     }
   });
 
-  const highlight = hovered || active;
+  const dim = active === false && connected === false;
 
   return (
-    <group ref={group}>
-      <Trail width={highlight ? 3 : 1.5} length={6} color={data.color} attenuation={(w) => w * w} decay={1}>
-        <mesh
-          ref={mesh}
-          onPointerOver={(e) => {
-            e.stopPropagation();
-            setHovered(true);
-            document.body.style.cursor = "pointer";
-          }}
-          onPointerOut={() => {
-            setHovered(false);
-            document.body.style.cursor = "auto";
-          }}
-          onClick={(e) => {
-            e.stopPropagation();
-            onSelect(data.title);
-          }}
-        >
-          <sphereGeometry args={[data.size, 32, 32]} />
-          <meshStandardMaterial
-            color={data.color}
-            emissive={data.color}
-            emissiveIntensity={highlight ? 1.4 : 0.6}
-            metalness={0.6}
-            roughness={0.25}
-          />
-        </mesh>
-      </Trail>
-      <Html center distanceFactor={9} position={[0, data.size + 0.35, 0]}>
+    <group ref={register}>
+      {/* soft halo */}
+      <mesh ref={halo}>
+        <sphereGeometry args={[data.size, 16, 16]} />
+        <meshBasicMaterial color={data.color} transparent opacity={0.12} depthWrite={false} />
+      </mesh>
+      {/* node core */}
+      <mesh
+        ref={mesh}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          setHovered(true);
+          document.body.style.cursor = "pointer";
+        }}
+        onPointerOut={() => {
+          setHovered(false);
+          document.body.style.cursor = "auto";
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          onSelect(data.title);
+        }}
+      >
+        <icosahedronGeometry args={[data.size, 1]} />
+        <meshStandardMaterial
+          color={data.color}
+          emissive={data.color}
+          emissiveIntensity={highlight ? 1.8 : 0.7}
+          metalness={0.5}
+          roughness={0.25}
+          flatShading
+        />
+      </mesh>
+      <Html center distanceFactor={8} position={[0, data.size + 0.34, 0]}>
         <div
           onClick={() => onSelect(data.title)}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", opacity: dim ? 0.45 : 1 }}
           className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[11px] font-semibold transition-all duration-200 ${
             highlight
               ? "bg-primary text-primary-foreground scale-110 shadow-lg"
@@ -186,6 +124,129 @@ function Planet({ data, radius, speed, offset, tilt, active, onSelect }: PlanetP
   );
 }
 
+type NeuralNetProps = {
+  nodes: SkillPlanet[];
+  active: string | null;
+  onSelect: (title: string) => void;
+};
+
+function NeuralNetwork({ nodes, active, onSelect }: NeuralNetProps) {
+  const n = nodes.length;
+  const base = useMemo(() => fibonacciSphere(n, 2.6), [n]);
+  const edges = useMemo(() => buildEdges(base, 2), [base]);
+
+  const activeIndex = active ? nodes.findIndex((x) => x.title === active) : -1;
+  const connectedSet = useMemo(() => {
+    const s = new Set<number>();
+    if (activeIndex < 0) return s;
+    for (const [a, b] of edges) {
+      if (a === activeIndex) s.add(b);
+      if (b === activeIndex) s.add(a);
+    }
+    return s;
+  }, [edges, activeIndex]);
+
+  const groupRefs = useRef<(THREE.Group | null)[]>([]);
+  const rootRef = useRef<THREE.Group>(null);
+  const lineRef = useRef<THREE.LineSegments>(null);
+  const live = useRef<Float32Array>(new Float32Array(n * 3));
+
+  const lineGeo = useMemo(() => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(edges.length * 6), 3));
+    return g;
+  }, [edges]);
+
+  // travelling data pulses along a subset of edges
+  const pulses = useMemo(
+    () =>
+      edges.map((e) => ({
+        edge: e,
+        speed: 0.25 + Math.random() * 0.45,
+        offset: Math.random(),
+        color: nodes[e[0]].color,
+      })),
+    [edges, nodes],
+  );
+  const pulseRefs = useRef<(THREE.Mesh | null)[]>([]);
+
+  useFrame((state) => {
+    const t = state.clock.elapsedTime;
+    if (rootRef.current) rootRef.current.rotation.y = t * 0.12;
+
+    // gentle drift for each node + capture live positions
+    for (let i = 0; i < n; i++) {
+      const b = base[i];
+      const x = b[0] + Math.sin(t * 0.5 + i) * 0.14;
+      const y = b[1] + Math.cos(t * 0.4 + i * 1.3) * 0.14;
+      const z = b[2] + Math.sin(t * 0.6 + i * 0.7) * 0.14;
+      live.current[i * 3] = x;
+      live.current[i * 3 + 1] = y;
+      live.current[i * 3 + 2] = z;
+      const g = groupRefs.current[i];
+      if (g) g.position.set(x, y, z);
+    }
+
+    // update synapse lines
+    const geo = lineRef.current?.geometry;
+    if (geo) {
+      const arr = geo.attributes.position.array as Float32Array;
+      let k = 0;
+      for (const [a, b] of edges) {
+        arr[k++] = live.current[a * 3];
+        arr[k++] = live.current[a * 3 + 1];
+        arr[k++] = live.current[a * 3 + 2];
+        arr[k++] = live.current[b * 3];
+        arr[k++] = live.current[b * 3 + 1];
+        arr[k++] = live.current[b * 3 + 2];
+      }
+      geo.attributes.position.needsUpdate = true;
+    }
+
+    // move travelling pulses
+    pulses.forEach((p, i) => {
+      const m = pulseRefs.current[i];
+      if (!m) return;
+      const tt = (t * p.speed + p.offset) % 1;
+      const [a, b] = p.edge;
+      m.position.set(
+        live.current[a * 3] + (live.current[b * 3] - live.current[a * 3]) * tt,
+        live.current[a * 3 + 1] + (live.current[b * 3 + 1] - live.current[a * 3 + 1]) * tt,
+        live.current[a * 3 + 2] + (live.current[b * 3 + 2] - live.current[a * 3 + 2]) * tt,
+      );
+    });
+  });
+
+  return (
+    <group ref={rootRef}>
+      {/* synapse connections */}
+      <lineSegments ref={lineRef} geometry={lineGeo}>
+        <lineBasicMaterial color="#22d3ee" transparent opacity={0.22} />
+      </lineSegments>
+
+      {/* travelling data pulses */}
+      {pulses.map((p, i) => (
+        <mesh key={i} ref={(el) => (pulseRefs.current[i] = el)}>
+          <sphereGeometry args={[0.04, 8, 8]} />
+          <meshBasicMaterial color={p.color} />
+        </mesh>
+      ))}
+
+      {/* nodes */}
+      {nodes.map((data, i) => (
+        <Node
+          key={data.title}
+          data={data}
+          active={active === data.title}
+          connected={connectedSet.has(i)}
+          register={(g) => (groupRefs.current[i] = g)}
+          onSelect={onSelect}
+        />
+      ))}
+    </group>
+  );
+}
+
 type TechCanvasProps = {
   planets?: SkillPlanet[];
   active?: string | null;
@@ -193,56 +254,19 @@ type TechCanvasProps = {
 };
 
 export function TechCanvas({ planets = [], active = null, onSelect = () => {} }: TechCanvasProps) {
-  const ringRadii = [2.2, 2.7, 3.2, 3.7];
   return (
-    <Canvas
-      dpr={[1, 1.8]}
-      camera={{ position: [0, 0.4, 5.2], fov: 50 }}
-      gl={{ antialias: true, alpha: true }}
-    >
+    <Canvas dpr={[1, 1.8]} camera={{ position: [0, 0.2, 7], fov: 50 }} gl={{ antialias: true, alpha: true }}>
       <Suspense fallback={null}>
-        <ambientLight intensity={0.35} />
-        <directionalLight position={[5, 5, 5]} intensity={1.2} color="#22d3ee" />
+        <ambientLight intensity={0.45} />
+        <directionalLight position={[5, 5, 5]} intensity={1.1} color="#22d3ee" />
         <directionalLight position={[-5, -3, -5]} intensity={0.6} color="#a855f7" />
-        <pointLight position={[0, 0, 3]} intensity={0.7} color="#ffffff" />
+        <pointLight position={[0, 0, 4]} intensity={0.8} color="#ffffff" />
 
-        <Stars radius={60} depth={50} count={2500} factor={3} saturation={0} fade speed={1} />
+        <Stars radius={60} depth={50} count={2000} factor={3} saturation={0} fade speed={1} />
 
-        <Float speed={1.4} rotationIntensity={0.3} floatIntensity={0.5}>
-          <CoreOrb />
-          <Atmosphere />
-        </Float>
+        <NeuralNetwork nodes={planets} active={active} onSelect={onSelect} />
 
-        {ringRadii.map((r, i) => (
-          <Ring
-            key={r}
-            radius={r}
-            tilt={Math.PI / 2.2}
-            color={i % 2 === 0 ? "#22d3ee" : "#a855f7"}
-            speed={i % 2 === 0 ? 0.08 : -0.06}
-          />
-        ))}
-
-        {planets.map((p, i) => (
-          <Planet
-            key={p.title}
-            data={p}
-            radius={ringRadii[i % ringRadii.length]}
-            speed={(i % 2 === 0 ? 0.32 : -0.28) - i * 0.01}
-            offset={(i / Math.max(planets.length, 1)) * Math.PI * 2}
-            tilt={0.25}
-            active={active === p.title}
-            onSelect={onSelect}
-          />
-        ))}
-
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          autoRotate
-          autoRotateSpeed={0.6}
-          rotateSpeed={0.4}
-        />
+        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.4} rotateSpeed={0.4} />
       </Suspense>
     </Canvas>
   );
