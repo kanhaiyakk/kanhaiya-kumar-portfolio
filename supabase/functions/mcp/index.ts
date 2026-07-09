@@ -3,7 +3,7 @@
 // supabase function: mcp
 // Bundled from src/lib/mcp/index.ts by @lovable.dev/mcp-js.
 // src/lib/mcp/index.ts
-import { defineMcp } from "npm:@lovable.dev/mcp-js@0.20.0";
+import { auth, defineMcp } from "npm:@lovable.dev/mcp-js@0.20.0";
 
 // src/lib/mcp/tools/get-profile.ts
 import { defineTool } from "npm:@lovable.dev/mcp-js@0.20.0";
@@ -130,11 +130,16 @@ var get_contact_default = defineTool4({
 });
 
 // src/lib/mcp/index.ts
+var projectRef = "gzvebovoklbtqeoeevcf";
 var mcp_default = defineMcp({
   name: "kanhaiya-kumar-portfolio-mcp",
   title: "Kanhaiya Kumar Portfolio MCP",
   version: "0.1.0",
   instructions: "Tools for exploring Kanhaiya Kumar's developer portfolio. Use `get_profile` for a summary, `get_skills` for the tech stack, `get_experience` for work history, and `get_contact` for public contact details.",
+  auth: auth.oauth.issuer({
+    issuer: `https://${projectRef}.supabase.co/auth/v1`,
+    acceptedAudiences: "authenticated"
+  }),
   tools: [get_profile_default, get_skills_default, get_experience_default, get_contact_default]
 });
 
