@@ -5,6 +5,50 @@ import { SectionHeading } from "./SectionHeading";
 import { TechCanvas } from "./three/TechCanvas";
 import { useState } from "react";
 
+// Maps a skill name to its Simple Icons slug (https://simpleicons.org).
+// Skills without a recognizable brand logo simply render without an icon.
+const skillIcons: Record<string, string> = {
+  "Java 21": "openjdk",
+  "Spring Boot": "springboot",
+  "Spring MVC": "spring",
+  "Spring Data JPA": "spring",
+  "Spring Security": "springsecurity",
+  Hibernate: "hibernate",
+  "Google Gemini API": "googlegemini",
+  pgvector: "postgresql",
+  MySQL: "mysql",
+  PostgreSQL: "postgresql",
+  Gradle: "gradle",
+  Git: "git",
+  GitHub: "github",
+  Docker: "docker",
+  Postman: "postman",
+  Swagger: "swagger",
+  Sentry: "sentry",
+  Jira: "jira",
+  "Meta WhatsApp Cloud API": "whatsapp",
+  "Razorpay Payment Integration": "razorpay",
+  "Webhook Integration": "webhooks",
+  "MSG91 / Twilio SMS": "twilio",
+  JUnit: "junit5",
+  AWS: "amazonwebservices",
+  Azure: "microsoftazure",
+};
+
+function SkillIcon({ name }: { name: string }) {
+  const slug = skillIcons[name];
+  if (!slug) return null;
+  return (
+    <img
+      src={`https://cdn.simpleicons.org/${slug}`}
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      className="h-3.5 w-3.5 shrink-0"
+    />
+  );
+}
+
 export function Skills() {
   const categories = [
     { title: "Languages", color: "#22d3ee", size: 0.26, skills: ["Java 21"] },
@@ -69,7 +113,8 @@ export function Skills() {
                   </h3>
                   <div className="flex flex-wrap gap-1.5">
                     {c.skills.map((s) => (
-                      <Badge key={s} variant="secondary" className="text-xs bg-secondary/60 hover:bg-primary/20 hover:text-primary transition-smooth">
+                      <Badge key={s} variant="secondary" className="text-xs bg-secondary/60 hover:bg-primary/20 hover:text-primary transition-smooth inline-flex items-center gap-1.5">
+                        <SkillIcon name={s} />
                         {s}
                       </Badge>
                     ))}

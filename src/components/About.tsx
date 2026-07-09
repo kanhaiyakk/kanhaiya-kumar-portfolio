@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Code2, Database, TestTube, Sparkles } from "lucide-react";
+import { Code2, Database, TestTube, Sparkles, MessageCircle } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
 import { SectionHeading } from "./SectionHeading";
 import { TiltCard } from "./TiltCard";
@@ -29,6 +29,16 @@ export function About() {
               <p className="text-lg text-foreground/90 leading-relaxed">
                 I care about <span className="font-semibold text-accent">clean, testable, maintainable code</span> — Hexagonal boundaries, <span className="font-semibold text-foreground">85–90%+ JUnit/Mockito coverage</span>, and a <span className="font-semibold text-primary">40% faster CI/CD pipeline</span>. Backed by <span className="font-semibold text-accent">500+ DSA problems</span> solved across LeetCode, GFG and HackerRank.
               </p>
+
+              <a
+                href="https://wa.me/918804936144?text=Hi%20Kanhaiya%2C%20I%20came%20across%20your%20portfolio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 font-medium text-primary-foreground gradient-primary transition-smooth hover:shadow-glow"
+              >
+                <MessageCircle className="h-5 w-5" />
+                Chat on WhatsApp
+              </a>
             </div>
           </ScrollReveal>
 
