@@ -7,6 +7,7 @@ import { TiltCard } from "./TiltCard";
 export function About() {
   const highlights = [
     { icon: Sparkles, title: "AI-Powered Backend", description: "Gemini 2.0 Flash LLM integration, ~90% CV parsing accuracy & AI fitness scoring" },
+    { icon: MessageCircle, title: "WhatsApp Hiring Funnel", description: "End-to-end recruitment funnel on Meta WhatsApp Cloud API — sign up, apply & pay via Razorpay in one chat" },
     { icon: Database, title: "Semantic Search", description: "pgvector + 768-d embeddings for real-time auto-suggestion at scale" },
     { icon: Code2, title: "Hexagonal Architecture", description: "Java 21 & Spring Boot with cleanly separated AI, persistence & file adapters" },
     { icon: TestTube, title: "Test-Driven Delivery", description: "JUnit & Mockito with 85–90%+ coverage and 40% faster CI/CD pipelines" },
@@ -29,16 +30,6 @@ export function About() {
               <p className="text-lg text-foreground/90 leading-relaxed">
                 I care about <span className="font-semibold text-accent">clean, testable, maintainable code</span> — Hexagonal boundaries, <span className="font-semibold text-foreground">85–90%+ JUnit/Mockito coverage</span>, and a <span className="font-semibold text-primary">40% faster CI/CD pipeline</span>. Backed by <span className="font-semibold text-accent">500+ DSA problems</span> solved across LeetCode, GFG and HackerRank.
               </p>
-
-              <a
-                href="https://wa.me/918804936144?text=Hi%20Kanhaiya%2C%20I%20came%20across%20your%20portfolio"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 font-medium text-primary-foreground gradient-primary transition-smooth hover:shadow-glow"
-              >
-                <MessageCircle className="h-5 w-5" />
-                Chat on WhatsApp
-              </a>
             </div>
           </ScrollReveal>
 
