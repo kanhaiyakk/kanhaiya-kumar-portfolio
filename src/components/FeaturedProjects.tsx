@@ -73,7 +73,7 @@ function WhatsAppContent() {
       <div className="p-5 bg-muted/40 rounded-lg border border-border/40">
         <h4 className="text-base font-semibold mb-3 flex items-center gap-2"><RefreshCw className="h-5 w-5 text-primary" /> End-to-End Result</h4>
         <p className="text-sm text-muted-foreground">
-          Verified end-to-end: invitation → consented → signed up → applied → paid member in ~14 minutes, in a single WhatsApp conversation.
+          Verified end-to-end: invitation → consented → signed up → applied → paid member in ~5 minutes, in a single WhatsApp conversation.
         </p>
       </div>
     </div>
